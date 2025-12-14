@@ -723,43 +723,79 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
         
-        /* 布局3：左上角4:3，中间3:4，右下角1:1 */
+        /* 布局3：对角线布局 - 左上4:3，中间3:4，右下1:1 */
         .layout-3 {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-            gap: 20px;
+            position: relative;
             height: 500px;
+            background: transparent;
         }
         
+        /* 左上角图片 - 4:3 */
         .layout-3-img-a {
-            grid-column: 1;
-            grid-row: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 45%;
+            height: 45%;
             border-radius: 10px;
             background-color: #f0e6d8;
             background-size: cover;
             background-position: center;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 2;
         }
         
+        /* 中间图片 - 3:4 (垂直方向) */
         .layout-3-img-b {
-            grid-column: 2;
-            grid-row: 1 / span 2;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40%;
+            height: 60%;
             border-radius: 10px;
             background-color: #f0e6d8;
             background-size: cover;
             background-position: center;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 3;
         }
         
+        /* 右下角图片 - 1:1 */
         .layout-3-img-c {
-            grid-column: 1;
-            grid-row: 2;
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 45%;
+            height: 45%;
             border-radius: 10px;
             background-color: #f0e6d8;
             background-size: cover;
             background-position: center;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            z-index: 2;
+        }
+        
+        /* 对角线装饰线 */
+        .diagonal-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .diagonal-line::before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 10%;
+            bottom: 10%;
+            right: 10%;
+            background: linear-gradient(to bottom right, transparent calc(50% - 1px), rgba(185, 147, 124, 0.2) calc(50% - 1px), rgba(185, 147, 124, 0.2) calc(50% + 1px), transparent calc(50% + 1px));
+            z-index: 1;
         }
         
         /* 图片加载占位符 */
@@ -852,26 +888,24 @@
                 height: 200px;
             }
             
+            /* 移动端对角线布局调整 */
             .layout-3 {
-                grid-template-columns: 1fr;
-                grid-template-rows: repeat(3, 200px);
-                height: auto;
-            }
-            
-            .layout-3-img-a, .layout-3-img-b, .layout-3-img-c {
-                grid-column: 1;
+                height: 400px;
             }
             
             .layout-3-img-a {
-                grid-row: 1;
+                width: 40%;
+                height: 40%;
             }
             
             .layout-3-img-b {
-                grid-row: 2;
+                width: 45%;
+                height: 55%;
             }
             
             .layout-3-img-c {
-                grid-row: 3;
+                width: 40%;
+                height: 40%;
             }
             
             .contact-info {
@@ -930,6 +964,10 @@
             .layout-title {
                 font-size: 1.4rem;
             }
+            
+            .layout-3 {
+                height: 350px;
+            }
         }
         
         /* 打印样式 */
@@ -943,6 +981,22 @@
                 max-width: 100%;
             }
         }
+        
+        /* 音乐播放修复 */
+        .music-fix-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #b9937c, #a57f68);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            z-index: 1001;
+            font-size: 0.9rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -950,6 +1004,9 @@
     <div class="music-player" id="musicPlayer">
         <i class="fas fa-play music-icon" id="musicIcon"></i>
     </div>
+    
+    <!-- 音乐修复按钮 -->
+    <button class="music-fix-btn" id="musicFixBtn" style="display: none;">点击修复音乐</button>
     
     <!-- 滚动进度条 -->
     <div class="progress-container">
@@ -1057,11 +1114,12 @@
             </div>
         </section>
         
-        <!-- 图片布局3：左上角4:3，中间3:4，右下角1:1 -->
+        <!-- 图片布局3：对角线布局 -->
         <section class="photo-layout" id="photo3">
             <h2 class="layout-title">美好瞬间</h2>
             <div class="layout-container">
                 <div class="layout-3">
+                    <div class="diagonal-line"></div>
                     <div class="layout-3-img-a image-loading" id="photo3-img1" style="background-image: url('https://chenmatou.github.io/laicai/images/photo7.jpg');"></div>
                     <div class="layout-3-img-b image-loading" id="photo3-img2" style="background-image: url('https://chenmatou.github.io/laicai/images/photo8.jpg');"></div>
                     <div class="layout-3-img-c image-loading" id="photo3-img3" style="background-image: url('https://chenmatou.github.io/laicai/images/photo9.jpg');"></div>
@@ -1232,6 +1290,7 @@
         const musicPlayer = document.getElementById('musicPlayer');
         const musicIcon = document.getElementById('musicIcon');
         const bgMusic = document.getElementById('bgMusic');
+        const musicFixBtn = document.getElementById('musicFixBtn');
         let isPlaying = false;
         
         // 设置音乐音量
@@ -1250,12 +1309,15 @@
                 
                 audio.addEventListener('error', (e) => {
                     console.error('音乐文件不可用:', e);
+                    // 显示修复按钮
+                    musicFixBtn.style.display = 'block';
                     resolve(false);
                 });
                 
                 // 设置超时
                 setTimeout(() => {
                     console.log('音乐文件检查超时');
+                    musicFixBtn.style.display = 'block';
                     resolve(false);
                 }, 3000);
             });
@@ -1303,7 +1365,7 @@
             }, 100);
         });
         
-        // 音乐播放器点击事件 - 最简单版本
+        // 音乐播放器点击事件
         musicPlayer.addEventListener('click', function() {
             if (isPlaying) {
                 bgMusic.pause();
@@ -1324,6 +1386,9 @@
                         // 播放失败
                         console.error('音乐播放失败:', error);
                         
+                        // 显示修复按钮
+                        musicFixBtn.style.display = 'block';
+                        
                         // 尝试直接播放，绕过浏览器限制
                         bgMusic.muted = true;
                         bgMusic.play().then(() => {
@@ -1331,12 +1396,37 @@
                             musicIcon.classList.remove('fa-play');
                             musicIcon.classList.add('fa-pause');
                             isPlaying = true;
+                            musicFixBtn.style.display = 'none';
                         }).catch(err => {
                             console.error('再次尝试播放失败:', err);
-                            alert('音乐播放失败，请检查音乐文件或点击页面任意位置后再试。\n音乐文件地址：https://chenmatou.github.io/laicai/music/wedding-song.mp3');
+                            musicFixBtn.style.display = 'block';
                         });
                     });
                 }
+            }
+        });
+        
+        // 音乐修复按钮点击事件
+        musicFixBtn.addEventListener('click', function() {
+            // 重新加载音乐文件
+            bgMusic.load();
+            
+            // 尝试播放
+            const playPromise = bgMusic.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // 播放成功
+                    musicIcon.classList.remove('fa-play');
+                    musicIcon.classList.add('fa-pause');
+                    isPlaying = true;
+                    musicFixBtn.style.display = 'none';
+                }).catch(error => {
+                    console.error('修复后播放失败:', error);
+                    
+                    // 提供手动播放指导
+                    alert('音乐播放需要用户交互。\n\n请按以下步骤操作：\n1. 点击页面任意位置\n2. 然后点击音乐播放按钮\n\n如果仍然无法播放，请检查音乐文件：\nhttps://chenmatou.github.io/laicai/music/wedding-song.mp3');
+                });
             }
         });
         
