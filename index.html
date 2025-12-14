@@ -43,7 +43,21 @@
             text-align: center;
             padding: 20px;
             position: relative;
-            background-attachment: scroll !important; /* 移除fixed */
+            background-attachment: scroll !important;
+        }
+        
+        /* 预加载图片到内存中 */
+        body::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            z-index: -1;
+            background-image: 
+                url('https://chenmatou.github.io/laicai/images/cover.jpg'),
+                url('https://chenmatou.github.io/laicai/images/photo1.jpg'),
+                url('https://chenmatou.github.io/laicai/images/photo2.jpg');
         }
         
         .cover::before {
@@ -326,6 +340,38 @@
             padding-left: 15px;
         }
         
+        /* 联系方式样式 - 修复对齐问题 */
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .contact-item {
+            flex: 1 1 45%;
+            min-width: 250px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: rgba(248, 232, 216, 0.2);
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .contact-label {
+            font-weight: 600;
+            color: #8b7355;
+            white-space: nowrap;
+        }
+        
+        .contact-phone {
+            color: #5a4a42;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+        
         /* 倒计时部分 */
         .countdown {
             background: linear-gradient(135deg, #8b7355, #b9937c);
@@ -518,6 +564,7 @@
             justify-content: center;
             gap: 25px;
             margin-top: 40px;
+            flex-wrap: wrap;
         }
         
         .social-icon {
@@ -596,7 +643,10 @@
             background-position: center;
             position: relative;
             margin: 0;
-            background-attachment: scroll !important; /* 修复：移除fixed */
+            background-attachment: scroll !important;
+            /* 添加加载过渡效果 */
+            background-color: #f5ede4;
+            background-repeat: no-repeat;
         }
         
         .image-overlay {
@@ -714,6 +764,20 @@
             .image-section {
                 height: 50vh;
             }
+            
+            /* 移动端联系方式布局 */
+            .contact-info {
+                flex-direction: column;
+            }
+            
+            .contact-item {
+                flex: 1 1 100%;
+                min-width: 100%;
+            }
+            
+            .detail-card {
+                padding: 25px;
+            }
         }
         
         @media (max-width: 480px) {
@@ -746,6 +810,14 @@
             .countdown-value {
                 font-size: 1.8rem;
             }
+            
+            .contact-label {
+                font-size: 0.9rem;
+            }
+            
+            .contact-phone {
+                font-size: 0.9rem;
+            }
         }
         
         /* 打印样式 */
@@ -763,6 +835,28 @@
                 box-shadow: none;
                 max-width: 100%;
             }
+        }
+        
+        /* 图片加载动画 */
+        .image-loaded {
+            animation: fadeIn 0.8s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0.7; }
+            to { opacity: 1; }
+        }
+        
+        /* 加载占位符 */
+        .image-loading {
+            background: linear-gradient(90deg, #f0e6d8 25%, #f8e8d8 50%, #f0e6d8 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
         }
     </style>
 </head>
@@ -805,8 +899,8 @@
             </div>
         </section>
         
-        <!-- 自定义图片区域1 -->
-        <div class="image-section" id="image1" style="background-image: url('https://chenmatou.github.io/laicai/images/cover.jpg');">
+        <!-- 自定义图片区域1 - 改为photo1.jpg -->
+        <div class="image-section image-loading" id="image1" style="background-image: url('https://chenmatou.github.io/laicai/images/photo1.jpg');">
             <div class="image-overlay"></div>
         </div>
         
@@ -831,8 +925,8 @@
             </p>
         </section>
         
-        <!-- 自定义图片区域2 -->
-        <div class="image-section" id="image2" style="background-image: url('https://chenmatou.github.io/laicai/images/photo1.jpg');">
+        <!-- 自定义图片区域2 - 改为photo2.jpg -->
+        <div class="image-section image-loading" id="image2" style="background-image: url('https://chenmatou.github.io/laicai/images/photo2.jpg');">
             <div class="image-overlay"></div>
         </div>
         
@@ -853,8 +947,8 @@
             </div>
         </section>
         
-        <!-- 自定义图片区域3 -->
-        <div class="image-section" id="image3" style="background-image: url('https://chenmatou.github.io/laicai/images/photo2.jpg');">
+        <!-- 自定义图片区域3 - 添加第三张图片，暂时也用photo1.jpg -->
+        <div class="image-section image-loading" id="image3" style="background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
             <div class="image-overlay"></div>
         </div>
         
@@ -876,7 +970,18 @@
                     <p><strong>地点</strong> 莆田市秀屿区笏石镇岭美村大埔戏台</p>
                     <p><strong>导航</strong> 请使用高德地图或百度地图导航</p>
                     <p><strong>停车</strong> 现场提供充足的停车位</p>
-                    <p><strong>联系方式</strong> 新郎：陈先生 13055680832 | 新娘：涂小姐 15206009150</p>
+                </div>
+                
+                <!-- 联系方式 - 重新设计布局 -->
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-label">新郎 陈伊涵:</span>
+                        <span class="contact-phone">13055680832</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-label">新娘 涂腾文:</span>
+                        <span class="contact-phone">15206009150</span>
+                    </div>
                 </div>
             </div>
         </section>
@@ -1013,7 +1118,7 @@
         let isPlaying = false;
         
         // 设置音乐音量（0-1之间）
-        bgMusic.volume = 0.8; // 修复：改为0.8（80%音量）
+        bgMusic.volume = 0.8;
         
         // 用户交互后自动播放音乐
         function initAudio() {
@@ -1045,10 +1150,8 @@
             } else {
                 bgMusic.play().catch(e => {
                     console.log("播放失败:", e);
-                    // 显示更友好的提示
                     const userAction = confirm("音乐播放需要您的授权。\n\n请点击确认后，再点击音乐按钮播放。\n\n或者您可以检查：\n1. 浏览器是否阻止了自动播放\n2. 音乐文件是否可用");
                     if (userAction) {
-                        // 用户确认后再次尝试
                         setTimeout(() => {
                             bgMusic.play().catch(err => {
                                 alert("音乐播放失败，请检查音乐文件或网络连接。");
@@ -1061,6 +1164,43 @@
                 isPlaying = true;
             }
         });
+        
+        // 图片预加载和渐进加载
+        function preloadImages() {
+            const imageUrls = [
+                'https://chenmatou.github.io/laicai/images/cover.jpg',
+                'https://chenmatou.github.io/laicai/images/photo1.jpg',
+                'https://chenmatou.github.io/laicai/images/photo2.jpg',
+                'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
+            ];
+            
+            imageUrls.forEach(url => {
+                const img = new Image();
+                img.src = url;
+                img.onload = function() {
+                    console.log('图片加载完成:', url);
+                };
+            });
+        }
+        
+        // 渐进式图片加载
+        function loadImagesProgressively() {
+            const imageSections = document.querySelectorAll('.image-section');
+            
+            imageSections.forEach(section => {
+                const img = new Image();
+                const bgImage = window.getComputedStyle(section).backgroundImage;
+                const url = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
+                
+                img.src = url;
+                img.onload = function() {
+                    // 移除加载动画类
+                    section.classList.remove('image-loading');
+                    // 添加加载完成类
+                    section.classList.add('image-loaded');
+                };
+            });
+        }
         
         // 滚动进度条
         window.addEventListener('scroll', function() {
@@ -1131,10 +1271,9 @@
             });
         }
         
-        // 倒计时功能 - 修复日期格式
+        // 倒计时功能
         function updateCountdown() {
-            // 使用正确的日期格式（本地时间）
-            const weddingDate = new Date(2025, 11, 29, 18, 0, 0); // 注意：月份是0-11，所以12月是11
+            const weddingDate = new Date(2025, 11, 29, 18, 0, 0);
             const now = new Date();
             const timeLeft = weddingDate.getTime() - now.getTime();
             
@@ -1154,10 +1293,6 @@
             }
         }
         
-        // 初始化倒计时
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
-        
         // RSVP表单提交
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1169,8 +1304,6 @@
             const message = document.getElementById('message').value;
             
             if (name && attendance && guests) {
-                // 在实际使用中，这里应该将数据发送到服务器
-                // 这里我们模拟提交成功
                 const attendanceText = {
                     'yes': '准时出席',
                     'maybe': '待定',
@@ -1222,6 +1355,14 @@
         
         // 页面加载完成后的效果
         window.addEventListener('load', function() {
+            // 预加载图片
+            preloadImages();
+            
+            // 渐进式加载图片
+            setTimeout(() => {
+                loadImagesProgressively();
+            }, 500);
+            
             // 添加加载完成后的动画
             document.body.style.opacity = '0';
             document.body.style.transition = 'opacity 0.8s';
@@ -1239,6 +1380,10 @@
             // 检查倒计时是否正常工作
             console.log('倒计时初始化完成，下次更新在1秒后');
         });
+        
+        // 初始化倒计时
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>
