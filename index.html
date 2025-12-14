@@ -34,7 +34,7 @@
         .cover {
             height: 100vh;
             background: linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.3)), 
-                        url('https://images.unsplash.com/photo-1511285560929-80b456fea0bc?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') center/cover no-repeat;
+                        url('https://chenmatou.github.io/laicai/images/cover.jpg') center/cover no-repeat;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -43,6 +43,7 @@
             text-align: center;
             padding: 20px;
             position: relative;
+            background-attachment: scroll !important; /* 移除fixed */
         }
         
         .cover::before {
@@ -593,9 +594,9 @@
             height: 70vh;
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
             position: relative;
             margin: 0;
+            background-attachment: scroll !important; /* 修复：移除fixed */
         }
         
         .image-overlay {
@@ -712,7 +713,6 @@
             
             .image-section {
                 height: 50vh;
-                background-attachment: scroll;
             }
         }
         
@@ -876,7 +876,7 @@
                     <p><strong>地点</strong> 莆田市秀屿区笏石镇岭美村大埔戏台</p>
                     <p><strong>导航</strong> 请使用高德地图或百度地图导航</p>
                     <p><strong>停车</strong> 现场提供充足的停车位</p>
-                    <p><strong>联系方式</strong> 新郎：陈先生  13055680832 | 新娘：涂小姐  15206009150</p>
+                    <p><strong>联系方式</strong> 新郎：陈先生 13055680832 | 新娘：涂小姐 15206009150</p>
                 </div>
             </div>
         </section>
@@ -999,9 +999,8 @@
         </footer>
     </div>
     
-    <!-- 背景音乐 - 在这里更换您喜欢的音乐 -->
+    <!-- 背景音乐 -->
     <audio id="bgMusic" loop preload="auto">
-        <!-- 更换音乐链接：将下面的src替换为您喜欢的音乐URL -->
         <source src="https://chenmatou.github.io/laicai/music/wedding-song.mp3" type="audio/mpeg">
         您的浏览器不支持音频元素。
     </audio>
@@ -1013,8 +1012,8 @@
         const bgMusic = document.getElementById('bgMusic');
         let isPlaying = false;
         
-        // 设置音乐音量
-        bgMusic.volume = 66;
+        // 设置音乐音量（0-1之间）
+        bgMusic.volume = 0.8; // 修复：改为0.8（80%音量）
         
         // 用户交互后自动播放音乐
         function initAudio() {
@@ -1046,7 +1045,16 @@
             } else {
                 bgMusic.play().catch(e => {
                     console.log("播放失败:", e);
-                    alert("请点击页面任意位置后，再点击音乐按钮播放");
+                    // 显示更友好的提示
+                    const userAction = confirm("音乐播放需要您的授权。\n\n请点击确认后，再点击音乐按钮播放。\n\n或者您可以检查：\n1. 浏览器是否阻止了自动播放\n2. 音乐文件是否可用");
+                    if (userAction) {
+                        // 用户确认后再次尝试
+                        setTimeout(() => {
+                            bgMusic.play().catch(err => {
+                                alert("音乐播放失败，请检查音乐文件或网络连接。");
+                            });
+                        }, 100);
+                    }
                 });
                 musicIcon.classList.remove('fa-play');
                 musicIcon.classList.add('fa-pause');
@@ -1123,11 +1131,12 @@
             });
         }
         
-        // 倒计时功能
+        // 倒计时功能 - 修复日期格式
         function updateCountdown() {
-            const weddingDate = new Date('2025-12-29T18:28:00').getTime();
-            const now = new Date().getTime();
-            const timeLeft = weddingDate - now;
+            // 使用正确的日期格式（本地时间）
+            const weddingDate = new Date(2025, 11, 29, 18, 0, 0); // 注意：月份是0-11，所以12月是11
+            const now = new Date();
+            const timeLeft = weddingDate.getTime() - now.getTime();
             
             if (timeLeft > 0) {
                 const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
@@ -1226,6 +1235,9 @@
                 console.log('🎉 欢迎参加陈伊涵 & 涂腾文的婚礼！');
                 console.log('💝 祝新人永结同心，白头偕老！');
             }, 1500);
+            
+            // 检查倒计时是否正常工作
+            console.log('倒计时初始化完成，下次更新在1秒后');
         });
     </script>
 </body>
