@@ -43,21 +43,6 @@
             text-align: center;
             padding: 20px;
             position: relative;
-            background-attachment: scroll !important;
-        }
-        
-        /* 预加载图片到内存中 */
-        body::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0;
-            overflow: hidden;
-            z-index: -1;
-            background-image: 
-                url('https://chenmatou.github.io/laicai/images/cover.jpg'),
-                url('https://chenmatou.github.io/laicai/images/photo1.jpg'),
-                url('https://chenmatou.github.io/laicai/images/photo2.jpg');
         }
         
         .cover::before {
@@ -340,36 +325,38 @@
             padding-left: 15px;
         }
         
-        /* 联系方式样式 - 修复对齐问题 */
+        /* 联系方式样式 */
         .contact-info {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
-            margin-top: 10px;
+            gap: 15px;
+            margin-top: 15px;
+            justify-content: space-between;
         }
         
         .contact-item {
-            flex: 1 1 45%;
-            min-width: 250px;
+            flex: 1;
+            min-width: 300px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 8px 12px;
-            background: rgba(248, 232, 216, 0.2);
-            border-radius: 8px;
-            margin-bottom: 8px;
+            gap: 15px;
+            padding: 12px 15px;
+            background: rgba(248, 232, 216, 0.3);
+            border-radius: 10px;
+            border: 1px solid #e8d0b3;
         }
         
         .contact-label {
             font-weight: 600;
             color: #8b7355;
             white-space: nowrap;
+            min-width: 80px;
         }
         
         .contact-phone {
             color: #5a4a42;
             font-weight: 500;
-            white-space: nowrap;
+            font-size: 1.1rem;
         }
         
         /* 倒计时部分 */
@@ -643,10 +630,6 @@
             background-position: center;
             position: relative;
             margin: 0;
-            background-attachment: scroll !important;
-            /* 添加加载过渡效果 */
-            background-color: #f5ede4;
-            background-repeat: no-repeat;
         }
         
         .image-overlay {
@@ -706,6 +689,34 @@
             box-shadow: 0 0 10px rgba(185, 147, 124, 0.5);
         }
         
+        /* 祝福语部分（替换第三张图片） */
+        .blessing-section {
+            padding: 80px 40px;
+            background: linear-gradient(135deg, #f5ede4, #f0e6d8);
+            text-align: center;
+        }
+        
+        .blessing-title {
+            font-size: 2rem;
+            color: #b9937c;
+            margin-bottom: 40px;
+            font-weight: 400;
+            letter-spacing: 5px;
+            font-family: 'Ma Shan Zheng', cursive;
+        }
+        
+        .blessing-content {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #7a6a5a;
+            max-width: 700px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+        
         /* 响应式设计 */
         @media (max-width: 768px) {
             .couple-names {
@@ -718,7 +729,7 @@
                 margin: 0 10px;
             }
             
-            .invitation-card, .details, .rsvp-section {
+            .invitation-card, .details, .rsvp-section, .blessing-section {
                 padding: 50px 20px;
             }
             
@@ -765,17 +776,19 @@
                 height: 50vh;
             }
             
-            /* 移动端联系方式布局 */
             .contact-info {
                 flex-direction: column;
             }
             
             .contact-item {
-                flex: 1 1 100%;
                 min-width: 100%;
             }
             
             .detail-card {
+                padding: 25px;
+            }
+            
+            .blessing-content {
                 padding: 25px;
             }
         }
@@ -813,6 +826,7 @@
             
             .contact-label {
                 font-size: 0.9rem;
+                min-width: 70px;
             }
             
             .contact-phone {
@@ -837,17 +851,7 @@
             }
         }
         
-        /* 图片加载动画 */
-        .image-loaded {
-            animation: fadeIn 0.8s ease-in-out;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0.7; }
-            to { opacity: 1; }
-        }
-        
-        /* 加载占位符 */
+        /* 图片加载占位符 */
         .image-loading {
             background: linear-gradient(90deg, #f0e6d8 25%, #f8e8d8 50%, #f0e6d8 75%);
             background-size: 200% 100%;
@@ -899,7 +903,7 @@
             </div>
         </section>
         
-        <!-- 自定义图片区域1 - 改为photo1.jpg -->
+        <!-- 自定义图片区域1 - 使用photo1.jpg -->
         <div class="image-section image-loading" id="image1" style="background-image: url('https://chenmatou.github.io/laicai/images/photo1.jpg');">
             <div class="image-overlay"></div>
         </div>
@@ -925,7 +929,7 @@
             </p>
         </section>
         
-        <!-- 自定义图片区域2 - 改为photo2.jpg -->
+        <!-- 自定义图片区域2 - 使用photo2.jpg -->
         <div class="image-section image-loading" id="image2" style="background-image: url('https://chenmatou.github.io/laicai/images/photo2.jpg');">
             <div class="image-overlay"></div>
         </div>
@@ -947,10 +951,21 @@
             </div>
         </section>
         
-        <!-- 自定义图片区域3 - 添加第三张图片，暂时也用photo1.jpg -->
-        <div class="image-section image-loading" id="image3" style="background-image: url('https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
-            <div class="image-overlay"></div>
-        </div>
+        <!-- 祝福语部分（替换第三张图片） -->
+        <section class="blessing-section" id="blessing">
+            <h2 class="blessing-title">感恩有你</h2>
+            <div class="blessing-content">
+                <p>感谢生命中有您的陪伴与支持，</p>
+                <p>您的祝福是我们婚礼最美的点缀。</p>
+                <p>愿这份喜悦能传递到您的心里，</p>
+                <p>愿我们的幸福能感染每一个重要的您。</p>
+                <br>
+                <p>人生路上，感恩相遇，</p>
+                <p>婚礼之日，诚盼相聚。</p>
+                <p>让我们一起见证这美好的时刻，</p>
+                <p>共同分享这份甜蜜的幸福。</p>
+            </div>
+        </section>
         
         <!-- 时间地点部分 -->
         <section class="details" id="details">
@@ -972,7 +987,7 @@
                     <p><strong>停车</strong> 现场提供充足的停车位</p>
                 </div>
                 
-                <!-- 联系方式 - 重新设计布局 -->
+                <!-- 联系方式 -->
                 <div class="contact-info">
                     <div class="contact-item">
                         <span class="contact-label">新郎 陈伊涵:</span>
@@ -1104,103 +1119,117 @@
         </footer>
     </div>
     
-    <!-- 背景音乐 -->
-    <audio id="bgMusic" loop preload="auto">
+    <!-- 背景音乐 - 修复音乐播放问题 -->
+    <audio id="bgMusic" preload="auto">
         <source src="https://chenmatou.github.io/laicai/music/wedding-song.mp3" type="audio/mpeg">
         您的浏览器不支持音频元素。
     </audio>
     
     <script>
-        // 音乐播放控制
+        // 音乐播放控制 - 修复版本
         const musicPlayer = document.getElementById('musicPlayer');
         const musicIcon = document.getElementById('musicIcon');
         const bgMusic = document.getElementById('bgMusic');
         let isPlaying = false;
         
-        // 设置音乐音量（0-1之间）
+        // 设置音乐音量
         bgMusic.volume = 0.8;
         
-        // 用户交互后自动播放音乐
-        function initAudio() {
-            if (!isPlaying && bgMusic.paused) {
-                bgMusic.play().then(() => {
-                    isPlaying = true;
-                    musicIcon.classList.remove('fa-play');
-                    musicIcon.classList.add('fa-pause');
-                }).catch(e => {
-                    console.log("自动播放被阻止，需要用户交互:", e);
+        // 检查音乐文件是否可用
+        function checkMusicAvailability() {
+            fetch('https://chenmatou.github.io/laicai/music/wedding-song.mp3', { method: 'HEAD' })
+                .then(response => {
+                    if (response.ok) {
+                        console.log('音乐文件可用');
+                        return true;
+                    } else {
+                        console.error('音乐文件不可用');
+                        return false;
+                    }
+                })
+                .catch(error => {
+                    console.error('检查音乐文件时出错:', error);
+                    return false;
                 });
-            }
-            document.removeEventListener('click', initAudio);
-            document.removeEventListener('touchstart', initAudio);
         }
         
-        // 添加事件监听器
-        document.addEventListener('click', initAudio);
-        document.addEventListener('touchstart', initAudio);
+        // 页面加载时检查音乐
+        window.addEventListener('load', function() {
+            checkMusicAvailability();
+            
+            // 图片加载完成后移除加载状态
+            const images = document.querySelectorAll('.image-section');
+            images.forEach(img => {
+                const bgUrl = img.style.backgroundImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
+                const tempImg = new Image();
+                tempImg.onload = function() {
+                    img.classList.remove('image-loading');
+                };
+                tempImg.src = bgUrl;
+            });
+            
+            // 页面加载动画
+            document.body.style.opacity = '0';
+            document.body.style.transition = 'opacity 0.5s';
+            setTimeout(() => {
+                document.body.style.opacity = '1';
+            }, 100);
+            
+            // 检查倒计时
+            console.log('页面加载完成，倒计时初始化');
+        });
         
-        // 音乐播放器点击事件
+        // 音乐播放器点击事件 - 简化版本
         musicPlayer.addEventListener('click', function(e) {
             e.stopPropagation();
+            
             if (isPlaying) {
+                // 暂停音乐
                 bgMusic.pause();
                 musicIcon.classList.remove('fa-pause');
                 musicIcon.classList.add('fa-play');
                 isPlaying = false;
             } else {
-                bgMusic.play().catch(e => {
-                    console.log("播放失败:", e);
-                    const userAction = confirm("音乐播放需要您的授权。\n\n请点击确认后，再点击音乐按钮播放。\n\n或者您可以检查：\n1. 浏览器是否阻止了自动播放\n2. 音乐文件是否可用");
-                    if (userAction) {
-                        setTimeout(() => {
-                            bgMusic.play().catch(err => {
-                                alert("音乐播放失败，请检查音乐文件或网络连接。");
-                            });
-                        }, 100);
-                    }
-                });
-                musicIcon.classList.remove('fa-play');
-                musicIcon.classList.add('fa-pause');
-                isPlaying = true;
+                // 播放音乐 - 使用Promise处理
+                const playPromise = bgMusic.play();
+                
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        // 播放成功
+                        musicIcon.classList.remove('fa-play');
+                        musicIcon.classList.add('fa-pause');
+                        isPlaying = true;
+                    }).catch(error => {
+                        // 播放失败
+                        console.error('播放失败:', error);
+                        
+                        // 显示用户友好的提示
+                        if (error.name === 'NotAllowedError') {
+                            alert('请点击页面任意位置后，再点击音乐按钮播放。\n这是浏览器的安全策略要求。');
+                        } else if (error.name === 'NotSupportedError') {
+                            alert('您的浏览器不支持此音频格式，或音频文件损坏。');
+                        } else {
+                            alert('音乐播放失败，请检查音乐文件是否可用。\n音乐文件地址：https://chenmatou.github.io/laicai/music/wedding-song.mp3');
+                        }
+                        
+                        // 恢复播放按钮状态
+                        musicIcon.classList.remove('fa-pause');
+                        musicIcon.classList.add('fa-play');
+                        isPlaying = false;
+                    });
+                }
             }
         });
         
-        // 图片预加载和渐进加载
-        function preloadImages() {
-            const imageUrls = [
-                'https://chenmatou.github.io/laicai/images/cover.jpg',
-                'https://chenmatou.github.io/laicai/images/photo1.jpg',
-                'https://chenmatou.github.io/laicai/images/photo2.jpg',
-                'https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'
-            ];
-            
-            imageUrls.forEach(url => {
-                const img = new Image();
-                img.src = url;
-                img.onload = function() {
-                    console.log('图片加载完成:', url);
-                };
-            });
-        }
-        
-        // 渐进式图片加载
-        function loadImagesProgressively() {
-            const imageSections = document.querySelectorAll('.image-section');
-            
-            imageSections.forEach(section => {
-                const img = new Image();
-                const bgImage = window.getComputedStyle(section).backgroundImage;
-                const url = bgImage.replace(/url\(['"]?(.*?)['"]?\)/i, '$1');
-                
-                img.src = url;
-                img.onload = function() {
-                    // 移除加载动画类
-                    section.classList.remove('image-loading');
-                    // 添加加载完成类
-                    section.classList.add('image-loaded');
-                };
-            });
-        }
+        // 用户首次点击页面时尝试预加载音乐
+        let firstClick = true;
+        document.body.addEventListener('click', function() {
+            if (firstClick) {
+                firstClick = false;
+                // 尝试预加载音乐（不播放）
+                bgMusic.load();
+            }
+        });
         
         // 滚动进度条
         window.addEventListener('scroll', function() {
@@ -1293,6 +1322,10 @@
             }
         }
         
+        // 初始化倒计时
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+        
         // RSVP表单提交
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -1326,14 +1359,13 @@
                       `💌 祝福留言：${message || '未填写'}\n\n` +
                       `我们已收到您的出席信息，期待与您共度这个特殊的日子！`);
                 
-                // 重置表单
                 document.getElementById('rsvpForm').reset();
             } else {
                 alert('请填写必填信息（姓名、是否出席、出席人数）！');
             }
         });
         
-        // 平滑滚动到各个部分
+        // 平滑滚动
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -1352,38 +1384,6 @@
         
         // 初始化导航点
         updateNavDots();
-        
-        // 页面加载完成后的效果
-        window.addEventListener('load', function() {
-            // 预加载图片
-            preloadImages();
-            
-            // 渐进式加载图片
-            setTimeout(() => {
-                loadImagesProgressively();
-            }, 500);
-            
-            // 添加加载完成后的动画
-            document.body.style.opacity = '0';
-            document.body.style.transition = 'opacity 0.8s';
-            
-            setTimeout(() => {
-                document.body.style.opacity = '1';
-            }, 100);
-            
-            // 显示欢迎信息
-            setTimeout(() => {
-                console.log('🎉 欢迎参加陈伊涵 & 涂腾文的婚礼！');
-                console.log('💝 祝新人永结同心，白头偕老！');
-            }, 1500);
-            
-            // 检查倒计时是否正常工作
-            console.log('倒计时初始化完成，下次更新在1秒后');
-        });
-        
-        // 初始化倒计时
-        updateCountdown();
-        setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>
