@@ -16,7 +16,7 @@ body{
 /* header */
 .header{
   height:62vh;min-height:380px;
-  background:linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.2)), url("https://raw.githubusercontent.com/chenmatou/laicai/main/images/cover.jpg") center/cover no-repeat;
+  background:linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.2)), url("images/cover.jpg") center/cover no-repeat;
   color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;position:relative;
 }
 .header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(to top,#fff,transparent)}
@@ -24,8 +24,6 @@ body{
 .title {font-size:2.0rem;letter-spacing:6px;margin:8px 0}
 .subtitle {font-size:1rem;letter-spacing:6px;margin-bottom:12px}
 .names {font-size:2.4rem;font-weight:300;letter-spacing:8px;margin-top:6px}
-
-/* small info bar under cover */
 .time-note {
   margin-top:14px;background:rgba(255,255,255,.94);color:#8b7355;padding:10px 18px;border-radius:6px;font-size:0.95rem;
 }
@@ -51,7 +49,7 @@ body{
 .count-value{font-size:1.9rem;color:#b8865a;font-weight:400}
 .count-label{font-size:0.85rem;color:#7a6a5a;margin-top:6px}
 
-/* sweet section（背景三）对角布局 */
+/* sweet section 对角布局 */
 .sweet-section{padding:46px 28px;background:#fff;text-align:center;position:relative}
 .sweet-section .heading{margin-bottom:22px}
 .sweet-grid{position:relative;margin:0 auto;width:92%;max-width:920px;height:420px;z-index:2}
@@ -64,7 +62,7 @@ body{
 .photo-center{width:46%;aspect-ratio:1/1;left:27%;top:-6%;z-index:4;border:6px solid rgba(255,255,255,.65)}
 .photo-right{width:42%;aspect-ratio:4/3;right:0;bottom:0;z-index:2}
 
-/* 板块四: 对齐式错位 */
+/* personal section / 板块四 */
 .personal-section{padding:36px 28px;background:#fff;text-align:center}
 .personal-section .heading{margin-bottom:22px}
 .personal-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:20px}
@@ -72,7 +70,7 @@ body{
   width:calc(50% - 10px);border-radius:10px;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,0.12);aspect-ratio:3/4;
   transition:transform .3s ease;
 }
-.personal-photo:nth-child(odd){margin-top:20px;} /* 错位 */
+.personal-photo:nth-child(odd){margin-top:20px;} 
 .personal-photo img{width:100%;height:100%;object-fit:cover;display:block}
 .personal-photo:hover img{transform:scale(1.03)}
 
@@ -112,22 +110,22 @@ input[type="text"], select, textarea{width:100%;padding:10px 12px;border:1px sol
 <div class="wrap">
 
   <!-- header / cover -->
-  <header class="header" role="banner" aria-label="婚礼封面">
+  <header class="header">
     <div class="date">2025.12.29</div>
     <div class="title">我们结婚啦</div>
     <div class="subtitle">our wedding</div>
     <div class="names">陈伊涵 &amp; 涂腾文</div>
-    <div class="time-note">婚宴时间：2025年12月29日 （星期一） 18:00 &nbsp;·&nbsp; 请提前半小时到达现场</div>
+    <div class="time-note">婚宴时间：2025年12月29日 （星期一） 18:00 · 请提前半小时到达现场</div>
   </header>
 
   <!-- invitation -->
-  <section class="section" aria-labelledby="inv-title">
-    <h2 id="inv-title" class="heading">诚礼邀请函</h2>
+  <section class="section">
+    <h2 class="heading">诚礼邀请函</h2>
     <p class="text">我们曾各自在人海中寻觅，直到遇见彼此，才明白什么是命中注定。诚邀你来见证我们的双向奔赴。</p>
   </section>
 
   <!-- time & place -->
-  <section class="time-place" aria-labelledby="timeplace">
+  <section class="time-place">
     <div class="card">
       <h4>典礼时间</h4>
       <div>2025年12月29日（星期一）</div>
@@ -157,9 +155,9 @@ input[type="text"], select, textarea{width:100%;padding:10px 12px;border:1px sol
   <section class="sweet-section">
     <h3 class="heading">幸福 · 甜蜜时刻</h3>
     <div class="sweet-grid">
-      <figure class="sweet-photo photo-left"><img src="https://raw.githubusercontent.com/chenmatou/laicai/main/images/photo1.jpg" alt=""></figure>
-      <figure class="sweet-photo photo-center"><img src="https://raw.githubusercontent.com/chenmatou/laicai/main/images/photo2.jpg" alt=""></figure>
-      <figure class="sweet-photo photo-right"><img src="https://raw.githubusercontent.com/chenmatou/laicai/main/images/photo3.jpg" alt=""></figure>
+      <figure class="sweet-photo photo-left"><img src="images/photo1.jpg" alt=""></figure>
+      <figure class="sweet-photo photo-center"><img src="images/photo2.jpg" alt=""></figure>
+      <figure class="sweet-photo photo-right"><img src="images/photo3.jpg" alt=""></figure>
     </div>
   </section>
 
@@ -167,8 +165,8 @@ input[type="text"], select, textarea{width:100%;padding:10px 12px;border:1px sol
   <section class="personal-section">
     <h3 class="heading">新人照片</h3>
     <div class="personal-grid">
-      <figure class="personal-photo"><img src="https://raw.githubusercontent.com/chenmatou/laicai/main/images/person1.jpg" alt=""></figure>
-      <figure class="personal-photo"><img src="https://raw.githubusercontent.com/chenmatou/laicai/main/images/person2.jpg" alt=""></figure>
+      <figure class="personal-photo"><img src="images/person1.jpg" alt=""></figure>
+      <figure class="personal-photo"><img src="images/person2.jpg" alt=""></figure>
     </div>
   </section>
 
@@ -218,7 +216,7 @@ input[type="text"], select, textarea{width:100%;padding:10px 12px;border:1px sol
   <i id="musicIcon" class="fa fa-play"></i>
 </div>
 <audio id="bgMusic" loop preload="none">
-  <source src="https://raw.githubusercontent.com/chenmatou/laicai/main/music/wedding-song.mp3" type="audio/mpeg">
+  <source src="music/wedding-song.mp3" type="audio/mpeg">
   您的浏览器不支持音频元素。
 </audio>
 
@@ -229,7 +227,6 @@ input[type="text"], select, textarea{width:100%;padding:10px 12px;border:1px sol
   const elHours = document.getElementById('cd-hours');
   const elMinutes = document.getElementById('cd-minutes');
   const elSeconds = document.getElementById('cd-seconds');
-
   function tick(){
     const now = new Date();
     let diff = target - now;
@@ -243,7 +240,6 @@ input[type="text"], select, textarea{width:100%;padding:10px 12px;border:1px sol
   tick(); setInterval(tick,1000);
 })();
 
-/* RSVP */
 (function(){
   const form=document.getElementById('rsvpForm');
   const attendeeEl=document.getElementById('attendeeCount');
@@ -264,7 +260,6 @@ input[type="text"], select, textarea{width:100%;padding:10px 12px;border:1px sol
   });
 })();
 
-/* 音乐控制 */
 (function(){
   const btn=document.getElementById('musicToggle');
   const icon=document.getElementById('musicIcon');
@@ -274,7 +269,6 @@ input[type="text"], select, textarea{width:100%;padding:10px 12px;border:1px sol
   btn.addEventListener('click',function(){ if(playing){audio.pause();icon.className='fa fa-play';}else{audio.play().catch(()=>{});icon.className='fa fa-pause';} playing=!playing; });
 })();
 
-/* 图片点击放大 */
 document.querySelectorAll('.sweet-photo img,.personal-photo img').forEach(img=>{img.addEventListener('click',()=>{window.open(img.src,'_blank');});});
 </script>
 </body>
