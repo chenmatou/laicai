@@ -1,632 +1,225 @@
-```html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
-<title>陈伊涵 & 涂腾文 | 我们同行</title>
-
-<!-- fontawesome for icons (optional) -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+<title>陈伊涵 & 涂腾文｜我们同行</title>
 
 <style>
-  /* ================ RESET & BASE ================ */
-  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
-  html,body { height:100%; }
-  body {
-    font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
-    background: #2e2140; /* fallback */
-    color: #333;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    overflow-x:hidden;
-    line-height:1.6;
-  }
-  a { color:inherit; text-decoration:none; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;
+  background:#fafafa;color:#333;line-height:1.6
+}
+img{display:block;width:100%;height:100%;object-fit:cover}
+.container{max-width:1100px;margin:0 auto;background:#fff}
 
-  /* ================ TOP MUSIC BUTTON & POPUP ================ */
-  /* Music button top-right */
-  .music-btn {
-    position: fixed;
-    top: 18px;
-    right: 18px;
-    width: 56px;
-    height: 56px;
-    background: linear-gradient(135deg, #ffd966 0%, #b8874a 100%);
-    border-radius: 50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index: 2200;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.28);
-    cursor: pointer;
-    transition: transform .28s ease;
-  }
-  .music-btn img { width:28px; height:28px; display:block; pointer-events:none; }
-  .music-btn.playing { transform: rotate(0deg); } /* rotation applied to image */
-  .music-btn.playing img { animation: spin 2.5s linear infinite; }
-  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+/* 顶部封面 */
+.header{
+  height:65vh;min-height:420px;
+  background:
+    linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.15)),
+    url("https://raw.githubusercontent.com/chenmatou/laicai/main/images/cover.jpg")
+    center/cover no-repeat;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+}
+.header .date{letter-spacing:4px;font-weight:300}
+.header h1{margin:10px 0;font-size:2.2rem;letter-spacing:6px}
+.header .sub{letter-spacing:6px;font-size:.9rem}
+.header .names{margin-top:12px;font-size:2.4rem;letter-spacing:8px}
 
-  /* Music popup (rounded purple-gold high-grade material) */
-  #musicPopup {
-    position: fixed;
-    inset: 0;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index: 2100;
-    background: rgba(13,9,20,0.45);
-    backdrop-filter: blur(4px);
-  }
-  #musicPopup .popup {
-    width: min(92%, 520px);
-    border-radius: 18px;
-    padding: 26px;
-    text-align:center;
-    color: #fff;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.45);
-    background: linear-gradient(135deg, rgba(88,56,116,0.95) 0%, rgba(60,38,82,0.95) 60%);
-    border: 1px solid rgba(255,215,120,0.12);
-  }
-  #musicPopup .popup .title {
-    font-family: "Great Vibes", cursive;
-    font-size: 26px;
-    color: #ffeaa7;
-    margin-bottom: 14px;
-    text-shadow: 0 6px 18px rgba(0,0,0,0.35);
-  }
-  #musicPopup .popup .hint {
-    font-size: 14px;
-    color: rgba(255,238,170,0.95);
-    margin-bottom: 18px;
-    line-height:1.6;
-  }
-  #musicPopup .popup .btn {
-    display:inline-block;
-    padding: 12px 26px;
-    background: linear-gradient(180deg,#ffd966,#d6a349);
-    color:#34221a;
-    font-weight:600;
-    border-radius:12px;
-    border: none;
-    cursor:pointer;
-    box-shadow: 0 10px 30px rgba(213,160,88,0.18);
-  }
-  #musicPopup .popup .btn:active { transform: translateY(1px); }
+/* 通用区块 */
+.section{padding:48px 40px;text-align:center}
+.title{
+  color:#b8865a;
+  font-size:1.6rem;
+  margin-bottom:24px;
+}
 
-  /* ================ MAIN CONTAINER ================ */
-  .container {
-    max-width: 1040px;
-    margin: 0 auto;
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02));
-    padding-bottom: 60px;
-  }
+/* 长跑记录 */
+.sweet-wrap{position:relative;max-width:980px;margin:0 auto}
+.slash{
+  position:absolute;
+  left:50%;
+  top:50%;
+  transform:translate(-50%,-50%);
+  font-size:220px;
+  color:rgba(184,134,90,.12);
+  font-weight:700;
+  pointer-events:none;
+}
+.sweet-grid{
+  position:relative;
+  height:420px;
+}
+.photo{
+  position:absolute;
+  border-radius:12px;
+  overflow:hidden;
+  box-shadow:0 20px 40px rgba(0,0,0,.12)
+}
+.photo.left{width:42%;aspect-ratio:4/3;left:0;top:0;z-index:1}
+.photo.center{
+  width:46%;aspect-ratio:1/1;
+  left:27%;top:-6%;
+  z-index:3;
+  border:6px solid rgba(255,255,255,.6)
+}
+.photo.right{width:42%;aspect-ratio:4/3;right:0;bottom:0;z-index:1}
 
-  /* ================ HEADER (COVER) ================ */
-  .cover {
-    height: 100vh;
-    min-height: 560px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    position: relative;
-    overflow: hidden;
-    background-color:#371d44;
-    /* background pattern/image, replace bg-pattern.jpg with your purple-gold textile */
-    background-image: url('bg-pattern.jpg');
-    background-size: cover;
-    background-position: center;
-  }
-  /* subtle dark overlay */
-  .cover::before{
-    content:'';
-    position:absolute;
-    inset:0;
-    background: linear-gradient(180deg, rgba(18,10,28,0.45), rgba(18,10,28,0.25));
-    z-index:1;
-  }
-  .cover-inner {
-    position:relative;
-    z-index:2;
-    text-align:center;
-    color: #FFEFC6;
-    padding: 20px;
-    max-width: 920px;
-  }
-  .cover .date {
-    font-size: 18px;
-    letter-spacing: 6px;
-    opacity: 0.95;
-    margin-bottom: 10px;
-  }
-  .cover .title {
-    font-family: "Great Vibes", cursive;
-    font-size: 56px;
-    letter-spacing: 2px;
-    margin-bottom: 8px;
-    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  }
-  .cover .subtitle {
-    font-size:18px;
-    margin-bottom: 18px;
-    color: #FFF1B5;
-    letter-spacing: 5px;
-    text-transform: lowercase;
-  }
-  .cover .names {
-    font-size: 26px;
-    color: #FFF6DC;
-    margin-bottom: 14px;
-  }
-  .cover .quote {
-    width: min(720px, 86%);
-    margin: 0 auto;
-    font-size:15px;
-    color: rgba(255,242,200,0.9);
-    font-style: italic;
-    line-height:1.7;
-    border-top: 1px solid rgba(255,255,255,0.04);
-    border-bottom: 1px solid rgba(255,255,255,0.04);
-    padding:18px 12px;
-    margin-top:14px;
-  }
+/* 背景板块二 */
+.panel2{
+  position:relative;
+  padding:60px 40px 140px;
+  background:linear-gradient(#f7f3ee,#fff)
+}
+.panel2-inner{
+  max-width:900px;
+  margin:0 auto;
+  display:flex;
+  justify-content:center;
+  gap:20px;
+}
+.tall{
+  width:300px;
+  aspect-ratio:9/16;
+  border-radius:14px;
+  overflow:hidden;
+  box-shadow:0 25px 45px rgba(0,0,0,.15)
+}
+.tall.main{transform:rotate(-6deg) translateY(-20px)}
+.tall.alt{transform:rotate(4deg) translateY(20px)}
 
-  /* ================ CONTENT SECTIONS ================ */
-  .section {
-    padding: 58px 22px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));
-  }
-  .section .title {
-    text-align:center;
-    color: #FFDDA0;
-    font-size:22px;
-    margin-bottom:24px;
-    font-weight:600;
-  }
+.art{
+  position:absolute;
+  font-family:cursive;
+  font-size:42px;
+  color:#2e2a26;
+  opacity:.9;
+}
+.art.top{top:40px;right:14%;transform:rotate(-6deg)}
+.art.bottom{bottom:140px;left:10%;transform:rotate(3deg)}
 
-  /* ================ SWEET LAYOUT (custom three-photo composition) ================ */
-  .sweet-layout {
-    position: relative;
-    width: 100%;
-    max-width: 880px;
-    height: 520px;
-    margin: 0 auto;
-    display:block;
-  }
+.portraits{
+  position:absolute;
+  left:0;right:0;bottom:20px;
+  display:flex;
+  justify-content:space-between;
+  padding:0 40px;
+}
+.portrait{
+  width:48%;
+  height:160px;
+  border-radius:14px;
+  background-size:cover;
+  background-position:center;
+  box-shadow:0 20px 40px rgba(0,0,0,.12)
+}
+.male{
+  background-image:url("https://raw.githubusercontent.com/chenmatou/laicai/main/images/photo1.jpg");
+}
+.female{
+  background-image:url("https://raw.githubusercontent.com/chenmatou/laicai/main/images/photo2.jpg");
+}
 
-  /* photo base styles */
-  .sweet-layout .photo {
-    position: absolute;
-    overflow: hidden;
-    border-radius: 14px;
-    background: #eee;
-    box-shadow: 0 18px 50px rgba(0,0,0,0.32);
-    transition: transform .6s cubic-bezier(.2,.9,.3,1), box-shadow .3s ease;
-  }
-  .sweet-layout .photo img {
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    display:block;
-    transition: transform .6s ease;
-  }
-  .sweet-layout .photo:hover img { transform: scale(1.06); }
+/* 页脚 */
+.footer{
+  background:#5a4a42;
+  color:#eee;
+  text-align:center;
+  padding:32px;
+  font-size:.95rem
+}
 
-  /* center 1:1 - on top layer */
-  .photo.center {
-    width: 42%;
-    aspect-ratio: 1 / 1;
-    left: 50%;
-    top: 6%;
-    transform: translateX(-50%);
-    z-index: 30;
-  }
-
-  /* left-bottom 4:3 */
-  .photo.left {
-    width: 36%;
-    aspect-ratio: 4 / 3;
-    left: 4%;
-    bottom: 6%;
-    z-index: 10;
-    transform-origin: center;
-  }
-
-  /* right-bottom 4:3 */
-  .photo.right {
-    width: 36%;
-    aspect-ratio: 4 / 3;
-    right: 4%;
-    bottom: 6%;
-    z-index: 10;
-    transform-origin: center;
-  }
-
-  /* responsive tweaks for sweet layout */
-  @media (max-width:900px){
-    .sweet-layout { height: 480px; }
-    .photo.center { width: 54%; top: 4%; }
-    .photo.left, .photo.right { width: 40%; }
-  }
-  @media (max-width:520px){
-    .sweet-layout { height: 640px; }
-    .photo.center { width: 72%; top: 6%; }
-    .photo.left, .photo.right { width: 56%; left: 6%; right:6%; bottom: 4%; position: static; margin: 18px auto; transform: none; z-index: 8; }
-  }
-
-  /* ================ BACKGROUND IMAGE BLOCK + MISALIGNED 9:16 PORTRAITS ================ */
-  .bg-block {
-    position: relative;
-    width: 100%;
-    max-width: 1040px;
-    height: 520px;
-    margin: 56px auto 20px;
-    overflow: visible;
-    border-radius: 16px;
-  }
-  /* background stage */
-  .bg-block .stage {
-    position: absolute;
-    inset: 0;
-    border-radius: 16px;
-    background-image: url('bg-stage.jpg'); /* replace with your high-grade purple-gold stage */
-    background-size: cover;
-    background-position: center;
-    filter: saturate(.95) contrast(.96);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.38);
-  }
-
-  /* left vertical portrait (male) */
-  .portrait-left, .portrait-right {
-    position: absolute;
-    width: 28%;
-    aspect-ratio: 9 / 16;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 22px 60px rgba(0,0,0,0.38);
-    z-index: 30;
-    background:#222;
-  }
-  .portrait-left { left: 6%; top: -44px; transform: rotate(-2deg); }
-  .portrait-right { right: 6%; top: -12px; transform: rotate(2deg); }
-
-  .portrait-left img, .portrait-right img { width:100%; height:100%; object-fit:cover; display:block; }
-
-  /* small tilt hover */
-  .portrait-left:hover, .portrait-right:hover { transform: translateY(-6px) scale(1.02); transition: transform .36s ease; }
-
-  /* responsive for bg-block portraits */
-  @media (max-width:900px){
-    .portrait-left, .portrait-right { width: 32%; top: -28px; }
-  }
-  @media (max-width:520px){
-    .bg-block { height: 760px; }
-    .portrait-left, .portrait-right { position: relative; width: 46%; left: auto; right:auto; top: auto; margin: 24px auto; transform: none; }
-    .portrait-left img, .portrait-right img { border-radius: 12px; }
-  }
-
-  /* ================ INFO CARDS & FORM & FOOTER ================ */
-  .info-cards { display:flex; gap:24px; justify-content:center; flex-wrap:wrap; margin-top:18px; }
-  .card {
-    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02));
-    padding:22px; border-radius:12px; min-width:240px; max-width:320px; color:#FFEFD0;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.18); border:1px solid rgba(255,215,128,0.06);
-  }
-  .card h3 { color:#FFDDA0; margin-bottom:10px; text-align:center; font-size:18px; }
-  .card p { color:#ffeec9; font-size:15px; }
-
-  .wishes { margin:40px auto; max-width:760px; }
-
-  .footer {
-    margin-top:48px;
-    padding:34px 20px;
-    text-align:center;
-    color:#f8eedd;
-  }
-
-  /* ================ ANIMATION UTIL (IntersectionObserver will toggle .inview) ================ */
-  .fade { opacity:0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
-  .fade.inview { opacity:1; transform: translateY(0); }
-
-  /* small devices adjustments */
-  @media (max-width:420px){
-    .music-btn { width:48px; height:48px; top:12px; right:12px; }
-    .cover .title { font-size:40px; }
-  }
+/* 移动端 */
+@media(max-width:768px){
+  .sweet-grid{height:520px}
+  .photo.left{width:70%;left:5%}
+  .photo.center{width:62%;left:19%;top:28%}
+  .photo.right{width:70%;right:5%;top:55%;bottom:auto}
+  .slash{font-size:140px}
+  .panel2-inner{gap:10px}
+  .tall{width:220px}
+  .art{font-size:28px}
+  .portraits{padding:0 20px}
+}
 </style>
 </head>
-<body>
 
-  <!-- MUSIC POPUP -->
-  <div id="musicPopup" aria-hidden="false">
-    <div class="popup" role="dialog" aria-modal="true">
-      <div class="title">请帮我们开启胜利号角的音乐</div>
-      <div class="hint">轻触或点击任意位置 / 按钮即可播放背景音乐，为您呈现更佳观感。</div>
-      <button id="musicOk" class="btn" aria-label="开启音乐">开启音乐</button>
+<body>
+<div class="container">
+
+<header class="header">
+  <div class="date">2025.12.29</div>
+  <h1>我们同行</h1>
+  <div class="sub">OUR WEDDING</div>
+  <div class="names">陈伊涵 & 涂腾文</div>
+</header>
+
+<section class="section">
+  <h2 class="title">甜蜜时刻</h2>
+  <div class="sweet-wrap">
+    <div class="slash">\</div>
+    <div class="sweet-grid">
+      <div class="photo left">
+        <img src="https://raw.githubusercontent.com/chenmatou/laicai/main/images/photo1.jpg">
+      </div>
+      <div class="photo center">
+        <img src="https://raw.githubusercontent.com/chenmatou/laicai/main/images/photo2.jpg">
+      </div>
+      <div class="photo right">
+        <img src="https://raw.githubusercontent.com/chenmatou/laicai/main/images/photo1.jpg">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="panel2">
+  <div class="panel2-inner">
+    <div class="tall main">
+      <img src="https://raw.githubusercontent.com/chenmatou/laicai/main/images/photo2.jpg">
+    </div>
+    <div class="tall alt">
+      <img src="https://raw.githubusercontent.com/chenmatou/laicai/main/images/photo1.jpg">
     </div>
   </div>
 
-  <!-- TOP MUSIC BUTTON -->
-  <div class="music-btn" id="musicBtn" aria-label="音乐开关" title="音乐开关">
-    <img src="music-icon.png" alt="music icon">
+  <div class="art top">一陈不变</div>
+  <div class="art bottom">要有钱涂</div>
+
+  <div class="portraits">
+    <div class="portrait male"></div>
+    <div class="portrait female"></div>
   </div>
+</section>
 
-  <div class="container">
-    <!-- COVER -->
-    <header class="cover" role="banner">
-      <div class="cover-inner">
-        <div class="date">2025.12.29</div>
-        <div class="title">我们同行</div>
-        <div class="subtitle">our wedding</div>
-        <div class="names">陈伊涵 &amp; 涂腾文</div>
-        <div class="quote">The most beautiful love, there is no end of time, there is no land. Just want to accompany you for life. That's all!</div>
-      </div>
-    </header>
+<footer class="footer">
+  Love is space and time measured by the heart.<br>
+  2025 © 陈伊涵 & 涂腾文
+</footer>
 
-    <!-- OUR STORY -->
-    <section class="section">
-      <div class="title">我们的故事</div>
-      <div class="card" style="margin:0 auto; max-width:880px; text-align:center; color:#ffeec9;">
-        <p>我们曾各自在人海中寻觅，直到遇见彼此，才明白什么是命中注定。现在，我们决定携手共度余生。</p>
-      </div>
-    </section>
+</div>
 
-    <!-- SWEET LAYOUT (three-photo composition) -->
-    <section class="section" aria-label="甜蜜时刻">
-      <div class="title">甜蜜时刻</div>
-
-      <div class="sweet-layout" id="sweetLayout">
-        <!-- center 1:1 (top layer) -->
-        <div class="photo center fade" id="pCenter">
-          <img src="photo-center.jpg" alt="甜蜜中心照">
-        </div>
-
-        <!-- left 4:3 (bottom layer) -->
-        <div class="photo left fade" id="pLeft">
-          <img src="photo-left.jpg" alt="甜蜜左侧照">
-        </div>
-
-        <!-- right 4:3 (bottom layer) -->
-        <div class="photo right fade" id="pRight">
-          <img src="photo-right.jpg" alt="甜蜜右侧照">
-        </div>
-      </div>
-    </section>
-
-    <!-- BACKGROUND BLOCK + MISALIGNED 9:16 PORTRAITS (male left, female right) -->
-    <section class="section" aria-label="人物展示">
-      <div class="bg-block" role="group" aria-label="背景展示">
-        <div class="stage"></div>
-
-        <!-- left (male) portrait -->
-        <div class="portrait-left fade">
-          <img src="portrait-male.jpg" alt="新郎">
-        </div>
-
-        <!-- right (female) portrait -->
-        <div class="portrait-right fade">
-          <img src="portrait-female.jpg" alt="新娘">
-        </div>
-      </div>
-    </section>
-
-    <!-- INFO CARDS -->
-    <section class="section">
-      <div class="title">婚宴信息</div>
-      <div class="info-cards">
-        <div class="card fade">
-          <h3>典礼时间</h3>
-          <p>2025年12月29日（周一）</p>
-          <p>18:00 入场 · 18:30 开始</p>
-        </div>
-        <div class="card fade">
-          <h3>典礼地点</h3>
-          <p>示例酒店 · 金色大厅</p>
-          <p>请使用地图导航或联系主办方</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- WISHES (keep simple static) -->
-    <section class="section wishes">
-      <div class="title">祝福留言</div>
-      <div class="wishes">
-        <div class="card fade" style="text-align:left;">
-          <p style="color:#fff;">您的祝福是我们最珍贵的礼物，页面已做示例提交逻辑（若需要接入后端，我可以继续帮您接入）。</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="footer">
-      <div class="footer-text">Love is space and time measured by the heart.</div>
-      <div style="margin-top:12px; color:#f8eedd;">感谢您的到来与祝福 · 陈伊涵 &amp; 涂腾文</div>
-    </footer>
-  </div>
-
-  <!-- LOCAL AUDIO (use local file names; when hosting on GitHub, use raw URL or local assets) -->
-  <audio id="bgAudio" loop playsinline webkit-playsinline>
-    <!-- If you host at GitHub raw, use raw.githubusercontent.com path; if locally host, use music.mp3 -->
-    <!-- Example raw github (replace appropriately if using GitHub): -->
-    <!-- <source src="https://raw.githubusercontent.com/chenmatou/laicai/main/music/wedding-song.mp3" type="audio/mpeg"> -->
-    <source src="music.mp3" type="audio/mpeg">
-  </audio>
+<audio id="bgm" loop preload="none">
+  <source src="https://raw.githubusercontent.com/chenmatou/laicai/main/music/wedding-song.mp3" type="audio/mpeg">
+</audio>
 
 <script>
-/* =========================
-   Robust Music Playback Logic
-   - popup shown initially
-   - clicking popup button or any first user interaction will attempt play
-   - popup closes immediately on click
-   - music button toggles play/pause and shows rotation while playing
-   - uses promises and fallback retry on touch
-   ========================= */
-
-(function(){
-  const popup = document.getElementById('musicPopup');
-  const musicOk = document.getElementById('musicOk');
-  const musicBtn = document.getElementById('musicBtn');
-  const bgAudio = document.getElementById('bgAudio');
-
-  // audio initial volume
-  try { bgAudio.volume = 0.65; } catch(e){}
-
-  // helper to attempt play and mark UI
-  function attemptPlay() {
-    // Try play, return promise-like behavior
-    const p = bgAudio.play();
-    if (p !== undefined) {
-      p.then(()=> {
-        // playing
-        musicBtn.classList.add('playing');
-        musicBtn.classList.remove('paused');
-      }).catch((err)=>{
-        // blocked: wait for explicit user interaction; don't alert
-        // set one-time listeners to retry on next touch/click
-        attachOneTimeInteractionRetry();
-      });
-    } else {
-      // older browsers: assume play started or not supported
-      musicBtn.classList.add('playing');
-      musicBtn.classList.remove('paused');
-    }
+const bgm=document.getElementById("bgm");
+let played=false;
+document.addEventListener("click",()=>{
+  if(!played){
+    bgm.volume=.6;
+    bgm.play().catch(()=>{});
+    played=true;
   }
-
-  function attachOneTimeInteractionRetry(){
-    const retry = function(){
-      bgAudio.play().then(()=> {
-        musicBtn.classList.add('playing');
-        musicBtn.classList.remove('paused');
-      }).catch(()=>{ /* still blocked; ignore silently */ });
-      document.removeEventListener('click', retry);
-      document.removeEventListener('touchstart', retry);
-    };
-    document.addEventListener('click', retry, { once:true });
-    document.addEventListener('touchstart', retry, { once:true });
-  }
-
-  // close popup UI smoothly and try play
-  function closePopupAndPlay(){
-    if (!popup) return;
-    popup.style.opacity = '0';
-    popup.style.pointerEvents = 'none';
-    setTimeout(()=> { if (popup.parentNode) popup.parentNode.removeChild(popup); }, 320);
-    attemptPlay();
-  }
-
-  // popup button click -> close + play attempt
-  if (musicOk) {
-    musicOk.addEventListener('click', function(e){
-      e.stopPropagation();
-      closePopupAndPlay();
-    });
-  }
-
-  // Also close popup on any first general click/touch (some users tap outside)
-  function firstInteractionClose(e){
-    // ignore clicks inside the popup that are handled; this handles tapping outside
-    closePopupAndPlay();
-    document.removeEventListener('click', firstInteractionClose);
-    document.removeEventListener('touchstart', firstInteractionClose);
-  }
-  document.addEventListener('click', firstInteractionClose, { once:true });
-  document.addEventListener('touchstart', firstInteractionClose, { once:true });
-
-  // music button toggles play/pause
-  musicBtn.addEventListener('click', function(e){
-    e.stopPropagation();
-    // If audio is paused, try play (and request user gesture if needed)
-    if (bgAudio.paused) {
-      const p = bgAudio.play();
-      if (p && typeof p.then === 'function') {
-        p.then(()=> {
-          musicBtn.classList.add('playing');
-          musicBtn.classList.remove('paused');
-        }).catch(()=> {
-          // blocked - show the popup again briefly to ask for interaction
-          // recreate popup if removed
-          showTemporaryPopup();
-        });
-      } else {
-        musicBtn.classList.add('playing');
-        musicBtn.classList.remove('paused');
-      }
-    } else {
-      bgAudio.pause();
-      musicBtn.classList.remove('playing');
-      musicBtn.classList.add('paused');
-    }
-  });
-
-  // In case play was blocked and user tries tapping content, we retry via one-time events
-  function showTemporaryPopup(){
-    // if popup already exists, do nothing
-    if (document.getElementById('musicPopup')) return;
-    const temp = document.createElement('div');
-    temp.id = 'musicPopup';
-    temp.innerHTML = '<div class="popup"><div class="title">请点击确认播放音乐</div><div class="hint" style="color:#ffd;">再次点击页面任意位置或按钮即可播放。</div><button class="btn" id="tempOk">确认</button></div>';
-    document.body.appendChild(temp);
-    const tOk = document.getElementById('tempOk');
-    tOk.addEventListener('click', function(){
-      // remove and retry play
-      if (temp.parentNode) temp.parentNode.removeChild(temp);
-      attemptPlay();
-    }, { once:true });
-    // also allow one-time click anywhere to retry
-    document.addEventListener('click', function retryOnce(){ attemptPlay(); document.removeEventListener('click', retryOnce); }, { once:true });
-    document.addEventListener('touchstart', function retryOnce(){ attemptPlay(); document.removeEventListener('touchstart', retryOnce); }, { once:true });
-  }
-
-  // Accessibility: allow space/enter to toggle when focused on music button
-  musicBtn.addEventListener('keydown', function(e){
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      musicBtn.click();
-    }
-  });
-
-  // Clean up: if user navigates away, pause audio
-  window.addEventListener('pagehide', ()=> {
-    try { bgAudio.pause(); } catch(e){}
-  });
-
-  // END music logic
-})();
-
-/* =========================
-   Intersection Observer for subtle reveal animations
-   ========================= */
-(function(){
-  const ioOptions = { root: null, rootMargin: '0px', threshold: 0.12 };
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('inview');
-        // unobserve for performance
-        observer.unobserve(entry.target);
-      }
-    });
-  }, ioOptions);
-
-  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
-  document.querySelectorAll('.card').forEach(el => observer.observe(el));
-  document.querySelectorAll('.portrait-left, .portrait-right, .photo').forEach(el => observer.observe(el));
-})();
-
-/* =========================
-   Optional: click-to-open large images (lightbox minimal)
-   ========================= */
-(function(){
-  document.body.addEventListener('click', function(e){
-    const img = e.target;
-    if (img && img.tagName === 'IMG' && img.closest('.photo, .portrait-left, .portrait-right')) {
-      const src = img.src;
-      // open in new tab for simplicity (GitHub Pages friendly)
-      window.open(src, '_blank');
-    }
-  });
-})();
+},{once:true});
 </script>
+
 </body>
 </html>
-```
