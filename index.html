@@ -1,700 +1,632 @@
+```html
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>陈伊涵 & 涂腾文 | 我们同行</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-        }
-        
-        body {
-            font-family: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-            background-color: #fefefe;
-            color: #333;
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-        
-        /* 音乐播放器 */
-        .music-control {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background-color: rgba(255, 255, 255, 0.9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.1);
-            z-index: 1000;
-            cursor: pointer;
-        }
-        
-        .music-control i {
-            font-size: 22px;
-            color: #b8865a;
-        }
-        
-        /* 主容器 */
-        .wedding-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #fff;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.05);
-        }
-        
-        /* 顶部区域 */
-        .header-section {
-            height: 100vh;
-            min-height: 600px;
-            background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.2)), 
-                        url('https://github.com/chenmatou/laicai/blob/main/images/cover.jpg') center/cover no-repeat;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            text-align: center;
-            padding: 20px;
-            position: relative;
-        }
-        
-        .header-section::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(to top, #fff, transparent);
-        }
-        
-        .date-display {
-            font-size: 1.8rem;
-            letter-spacing: 3px;
-            margin-bottom: 10px;
-            font-weight: 300;
-        }
-        
-        .main-title {
-            font-size: 2.2rem;
-            letter-spacing: 5px;
-            margin: 30px 0 10px;
-            font-weight: 400;
-        }
-        
-        .subtitle {
-            font-size: 1.8rem;
-            letter-spacing: 8px;
-            margin-bottom: 40px;
-            font-weight: 300;
-        }
-        
-        .couple-names {
-            font-size: 2.5rem;
-            letter-spacing: 10px;
-            margin: 30px 0;
-            font-weight: 300;
-            line-height: 1.3;
-        }
-        
-        .love-quote {
-            max-width: 600px;
-            padding: 20px;
-            margin-top: 30px;
-            font-style: italic;
-            font-size: 1.1rem;
-            line-height: 1.8;
-            border-top: 1px solid rgba(255, 255, 255, 0.3);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-        }
-        
-        /* 内容区域 */
-        .content-section {
-            padding: 60px 40px;
-            text-align: center;
-        }
-        
-        .section-title {
-            font-size: 1.8rem;
-            color: #b8865a;
-            margin-bottom: 40px;
-            position: relative;
-            display: inline-block;
-            padding-bottom: 15px;
-        }
-        
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 2px;
-            background-color: #e8d0b3;
-        }
-        
-        .wedding-info {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            color: #666;
-            max-width: 600px;
-            margin: 0 auto 40px;
-        }
-        
-        /* 时间地点卡片 */
-        .info-cards {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin: 40px 0;
-        }
-        
-        .info-card {
-            background-color: #f9f5f0;
-            border-radius: 10px;
-            padding: 30px;
-            width: 100%;
-            max-width: 300px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-        }
-        
-        .info-card h3 {
-            color: #b8865a;
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        
-        /* 图片展示区域 */
-        .photo-section {
-            margin: 40px 0;
-        }
-        
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-        
-        .photo-item {
-            height: 300px;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            position: relative;
-        }
-        
-        .photo-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-        
-        .photo-item:hover img {
-            transform: scale(1.05);
-        }
-        
-        /* 留言祝福区域 */
-        .wishes-section {
-            background-color: #f9f5f0;
-            padding: 60px 40px;
-            margin: 40px 0;
-        }
-        
-        .wish-form {
-            max-width: 600px;
-            margin: 30px auto;
-            text-align: left;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #8b7355;
-        }
-        
-        .form-group input,
-        .form-group textarea,
-        .form-group select {
-            width: 100%;
-            padding: 12px 15px;
-            border: 1px solid #e8d0b3;
-            border-radius: 5px;
-            font-size: 1rem;
-            color: #5a4a42;
-            background-color: #fff;
-            font-family: inherit;
-        }
-        
-        .form-group textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-        
-        .submit-btn {
-            background-color: #b8865a;
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            font-size: 1.1rem;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: block;
-            margin: 30px auto;
-            letter-spacing: 2px;
-        }
-        
-        .submit-btn:hover {
-            background-color: #a5734a;
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(184, 134, 90, 0.3);
-        }
-        
-        /* 祝福语展示 */
-        .wishes-display {
-            max-width: 600px;
-            margin: 40px auto;
-            text-align: left;
-        }
-        
-        .wish-item {
-            background-color: white;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
-        }
-        
-        .wish-author {
-            font-weight: bold;
-            color: #b8865a;
-            margin-bottom: 5px;
-        }
-        
-        .wish-content {
-            color: #666;
-            line-height: 1.6;
-        }
-        
-        /* 页脚 */
-        .footer-section {
-            background-color: #5a4a42;
-            color: #f9f5f0;
-            text-align: center;
-            padding: 60px 40px;
-        }
-        
-        .footer-quote {
-            font-size: 1.2rem;
-            font-style: italic;
-            margin-bottom: 30px;
-            color: #e8d0b3;
-            line-height: 1.6;
-        }
-        
-        .copyright {
-            margin-top: 40px;
-            font-size: 0.9rem;
-            color: #c8b8a8;
-        }
-        
-        /* 响应式设计 */
-        @media (max-width: 768px) {
-            .header-section {
-                padding: 15px;
-                min-height: 500px;
-            }
-            
-            .date-display {
-                font-size: 1.4rem;
-            }
-            
-            .main-title {
-                font-size: 1.8rem;
-                letter-spacing: 3px;
-            }
-            
-            .subtitle {
-                font-size: 1.5rem;
-                letter-spacing: 5px;
-            }
-            
-            .couple-names {
-                font-size: 1.8rem;
-                letter-spacing: 6px;
-                margin: 20px 0;
-            }
-            
-            .love-quote {
-                font-size: 1rem;
-                padding: 15px;
-            }
-            
-            .content-section, .wishes-section, .footer-section {
-                padding: 40px 20px;
-            }
-            
-            .section-title {
-                font-size: 1.5rem;
-            }
-            
-            .info-cards {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .photo-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .photo-item {
-                height: 250px;
-            }
-            
-            .music-control {
-                top: 15px;
-                right: 15px;
-                width: 45px;
-                height: 45px;
-            }
-            
-            .music-control i {
-                font-size: 20px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .header-section {
-                min-height: 450px;
-            }
-            
-            .date-display {
-                font-size: 1.2rem;
-            }
-            
-            .main-title {
-                font-size: 1.5rem;
-            }
-            
-            .subtitle {
-                font-size: 1.3rem;
-                letter-spacing: 3px;
-            }
-            
-            .couple-names {
-                font-size: 1.5rem;
-                letter-spacing: 4px;
-            }
-            
-            .section-title {
-                font-size: 1.3rem;
-            }
-            
-            .info-card {
-                padding: 20px;
-            }
-        }
-        
-        /* 滚动动画效果 */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-        
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no" />
+<title>陈伊涵 & 涂腾文 | 我们同行</title>
+
+<!-- fontawesome for icons (optional) -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<style>
+  /* ================ RESET & BASE ================ */
+  * { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color: transparent; }
+  html,body { height:100%; }
+  body {
+    font-family: "PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;
+    background: #2e2140; /* fallback */
+    color: #333;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    overflow-x:hidden;
+    line-height:1.6;
+  }
+  a { color:inherit; text-decoration:none; }
+
+  /* ================ TOP MUSIC BUTTON & POPUP ================ */
+  /* Music button top-right */
+  .music-btn {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    width: 56px;
+    height: 56px;
+    background: linear-gradient(135deg, #ffd966 0%, #b8874a 100%);
+    border-radius: 50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index: 2200;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.28);
+    cursor: pointer;
+    transition: transform .28s ease;
+  }
+  .music-btn img { width:28px; height:28px; display:block; pointer-events:none; }
+  .music-btn.playing { transform: rotate(0deg); } /* rotation applied to image */
+  .music-btn.playing img { animation: spin 2.5s linear infinite; }
+  @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  /* Music popup (rounded purple-gold high-grade material) */
+  #musicPopup {
+    position: fixed;
+    inset: 0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index: 2100;
+    background: rgba(13,9,20,0.45);
+    backdrop-filter: blur(4px);
+  }
+  #musicPopup .popup {
+    width: min(92%, 520px);
+    border-radius: 18px;
+    padding: 26px;
+    text-align:center;
+    color: #fff;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.45);
+    background: linear-gradient(135deg, rgba(88,56,116,0.95) 0%, rgba(60,38,82,0.95) 60%);
+    border: 1px solid rgba(255,215,120,0.12);
+  }
+  #musicPopup .popup .title {
+    font-family: "Great Vibes", cursive;
+    font-size: 26px;
+    color: #ffeaa7;
+    margin-bottom: 14px;
+    text-shadow: 0 6px 18px rgba(0,0,0,0.35);
+  }
+  #musicPopup .popup .hint {
+    font-size: 14px;
+    color: rgba(255,238,170,0.95);
+    margin-bottom: 18px;
+    line-height:1.6;
+  }
+  #musicPopup .popup .btn {
+    display:inline-block;
+    padding: 12px 26px;
+    background: linear-gradient(180deg,#ffd966,#d6a349);
+    color:#34221a;
+    font-weight:600;
+    border-radius:12px;
+    border: none;
+    cursor:pointer;
+    box-shadow: 0 10px 30px rgba(213,160,88,0.18);
+  }
+  #musicPopup .popup .btn:active { transform: translateY(1px); }
+
+  /* ================ MAIN CONTAINER ================ */
+  .container {
+    max-width: 1040px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02));
+    padding-bottom: 60px;
+  }
+
+  /* ================ HEADER (COVER) ================ */
+  .cover {
+    height: 100vh;
+    min-height: 560px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position: relative;
+    overflow: hidden;
+    background-color:#371d44;
+    /* background pattern/image, replace bg-pattern.jpg with your purple-gold textile */
+    background-image: url('bg-pattern.jpg');
+    background-size: cover;
+    background-position: center;
+  }
+  /* subtle dark overlay */
+  .cover::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background: linear-gradient(180deg, rgba(18,10,28,0.45), rgba(18,10,28,0.25));
+    z-index:1;
+  }
+  .cover-inner {
+    position:relative;
+    z-index:2;
+    text-align:center;
+    color: #FFEFC6;
+    padding: 20px;
+    max-width: 920px;
+  }
+  .cover .date {
+    font-size: 18px;
+    letter-spacing: 6px;
+    opacity: 0.95;
+    margin-bottom: 10px;
+  }
+  .cover .title {
+    font-family: "Great Vibes", cursive;
+    font-size: 56px;
+    letter-spacing: 2px;
+    margin-bottom: 8px;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  }
+  .cover .subtitle {
+    font-size:18px;
+    margin-bottom: 18px;
+    color: #FFF1B5;
+    letter-spacing: 5px;
+    text-transform: lowercase;
+  }
+  .cover .names {
+    font-size: 26px;
+    color: #FFF6DC;
+    margin-bottom: 14px;
+  }
+  .cover .quote {
+    width: min(720px, 86%);
+    margin: 0 auto;
+    font-size:15px;
+    color: rgba(255,242,200,0.9);
+    font-style: italic;
+    line-height:1.7;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    padding:18px 12px;
+    margin-top:14px;
+  }
+
+  /* ================ CONTENT SECTIONS ================ */
+  .section {
+    padding: 58px 22px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.01));
+  }
+  .section .title {
+    text-align:center;
+    color: #FFDDA0;
+    font-size:22px;
+    margin-bottom:24px;
+    font-weight:600;
+  }
+
+  /* ================ SWEET LAYOUT (custom three-photo composition) ================ */
+  .sweet-layout {
+    position: relative;
+    width: 100%;
+    max-width: 880px;
+    height: 520px;
+    margin: 0 auto;
+    display:block;
+  }
+
+  /* photo base styles */
+  .sweet-layout .photo {
+    position: absolute;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #eee;
+    box-shadow: 0 18px 50px rgba(0,0,0,0.32);
+    transition: transform .6s cubic-bezier(.2,.9,.3,1), box-shadow .3s ease;
+  }
+  .sweet-layout .photo img {
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    transition: transform .6s ease;
+  }
+  .sweet-layout .photo:hover img { transform: scale(1.06); }
+
+  /* center 1:1 - on top layer */
+  .photo.center {
+    width: 42%;
+    aspect-ratio: 1 / 1;
+    left: 50%;
+    top: 6%;
+    transform: translateX(-50%);
+    z-index: 30;
+  }
+
+  /* left-bottom 4:3 */
+  .photo.left {
+    width: 36%;
+    aspect-ratio: 4 / 3;
+    left: 4%;
+    bottom: 6%;
+    z-index: 10;
+    transform-origin: center;
+  }
+
+  /* right-bottom 4:3 */
+  .photo.right {
+    width: 36%;
+    aspect-ratio: 4 / 3;
+    right: 4%;
+    bottom: 6%;
+    z-index: 10;
+    transform-origin: center;
+  }
+
+  /* responsive tweaks for sweet layout */
+  @media (max-width:900px){
+    .sweet-layout { height: 480px; }
+    .photo.center { width: 54%; top: 4%; }
+    .photo.left, .photo.right { width: 40%; }
+  }
+  @media (max-width:520px){
+    .sweet-layout { height: 640px; }
+    .photo.center { width: 72%; top: 6%; }
+    .photo.left, .photo.right { width: 56%; left: 6%; right:6%; bottom: 4%; position: static; margin: 18px auto; transform: none; z-index: 8; }
+  }
+
+  /* ================ BACKGROUND IMAGE BLOCK + MISALIGNED 9:16 PORTRAITS ================ */
+  .bg-block {
+    position: relative;
+    width: 100%;
+    max-width: 1040px;
+    height: 520px;
+    margin: 56px auto 20px;
+    overflow: visible;
+    border-radius: 16px;
+  }
+  /* background stage */
+  .bg-block .stage {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    background-image: url('bg-stage.jpg'); /* replace with your high-grade purple-gold stage */
+    background-size: cover;
+    background-position: center;
+    filter: saturate(.95) contrast(.96);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.38);
+  }
+
+  /* left vertical portrait (male) */
+  .portrait-left, .portrait-right {
+    position: absolute;
+    width: 28%;
+    aspect-ratio: 9 / 16;
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 22px 60px rgba(0,0,0,0.38);
+    z-index: 30;
+    background:#222;
+  }
+  .portrait-left { left: 6%; top: -44px; transform: rotate(-2deg); }
+  .portrait-right { right: 6%; top: -12px; transform: rotate(2deg); }
+
+  .portrait-left img, .portrait-right img { width:100%; height:100%; object-fit:cover; display:block; }
+
+  /* small tilt hover */
+  .portrait-left:hover, .portrait-right:hover { transform: translateY(-6px) scale(1.02); transition: transform .36s ease; }
+
+  /* responsive for bg-block portraits */
+  @media (max-width:900px){
+    .portrait-left, .portrait-right { width: 32%; top: -28px; }
+  }
+  @media (max-width:520px){
+    .bg-block { height: 760px; }
+    .portrait-left, .portrait-right { position: relative; width: 46%; left: auto; right:auto; top: auto; margin: 24px auto; transform: none; }
+    .portrait-left img, .portrait-right img { border-radius: 12px; }
+  }
+
+  /* ================ INFO CARDS & FORM & FOOTER ================ */
+  .info-cards { display:flex; gap:24px; justify-content:center; flex-wrap:wrap; margin-top:18px; }
+  .card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02));
+    padding:22px; border-radius:12px; min-width:240px; max-width:320px; color:#FFEFD0;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.18); border:1px solid rgba(255,215,128,0.06);
+  }
+  .card h3 { color:#FFDDA0; margin-bottom:10px; text-align:center; font-size:18px; }
+  .card p { color:#ffeec9; font-size:15px; }
+
+  .wishes { margin:40px auto; max-width:760px; }
+
+  .footer {
+    margin-top:48px;
+    padding:34px 20px;
+    text-align:center;
+    color:#f8eedd;
+  }
+
+  /* ================ ANIMATION UTIL (IntersectionObserver will toggle .inview) ================ */
+  .fade { opacity:0; transform: translateY(24px); transition: opacity .8s ease, transform .8s ease; }
+  .fade.inview { opacity:1; transform: translateY(0); }
+
+  /* small devices adjustments */
+  @media (max-width:420px){
+    .music-btn { width:48px; height:48px; top:12px; right:12px; }
+    .cover .title { font-size:40px; }
+  }
+</style>
 </head>
 <body>
-    <!-- 音乐播放器 -->
-    <div class="music-control" id="musicControl">
-        <i class="fas fa-play" id="musicIcon"></i>
+
+  <!-- MUSIC POPUP -->
+  <div id="musicPopup" aria-hidden="false">
+    <div class="popup" role="dialog" aria-modal="true">
+      <div class="title">请帮我们开启胜利号角的音乐</div>
+      <div class="hint">轻触或点击任意位置 / 按钮即可播放背景音乐，为您呈现更佳观感。</div>
+      <button id="musicOk" class="btn" aria-label="开启音乐">开启音乐</button>
     </div>
-    
-    <!-- 主容器 -->
-    <div class="wedding-container">
-        <!-- 顶部区域 -->
-        <section class="header-section">
-            <div class="date-display">2025.12.29</div>
-            <h1 class="main-title">我们同行</h1>
-            <div class="subtitle">our wedding</div>
-            <div class="couple-names">
-                陈伊涵 & 涂腾文
-            </div>
-            <div class="love-quote">
-                The most beautiful love, there is no end of time, there is no land.<br>
-                Just want to accompany you for life. That's all!
-            </div>
-        </section>
-        
-        <!-- 内容区域 -->
-        <section class="content-section fade-in">
-            <h2 class="section-title">我们的故事</h2>
-            <div class="wedding-info">
-                我们曾各自在人海中寻觅，直到遇见彼此，才明白什么是命中注定。<br>
-                从相识到相知，从相知到相爱，每一步都充满了惊喜与感恩。<br>
-                现在，我们决定携手共度余生，在亲友的见证下，许下永恒的誓言。
-            </div>
-            
-            <!-- 时间地点卡片 -->
-            <div class="info-cards">
-                <div class="info-card fade-in">
-                    <h3><i class="far fa-calendar-alt"></i> 典礼时间</h3>
-                    <p>2025年12月29日 星期一</p>
-                    <p>晚上18:00</p>
-                    <p>农历十一月初十</p>
-                </div>
-                
-                <div class="info-card fade-in">
-                    <h3><i class="fas fa-map-marker-alt"></i> 典礼地点</h3>
-                    <p>莆田市秀屿区笏石镇>pu>
-                    <p>岭美村大埔>li>
-                    <p>导航请使用高德地图</p>
-                </div>
-            </div>
-        </section>
-        
-        <!-- 图片展示区域 -->
-        <section class="content-section fade-in">
-            <h2 class="section-title">甜蜜时刻</h2>
-            <div class="photo-grid">
-                <div class="photo-item">
-                    <img src="https://github.com/chenmatou/laicai/blob/main/images/photo1.jpg" alt="甜蜜时刻1" id="photo1">
-                </div>
-                <div class="photo-item">
-                    <img src="https://github.com/chenmatou/laicai/blob/main/images/photo2.jpg" alt="甜蜜时刻2" id="photo2">
-                </div>
-                <div class="photo-item">
-                    <img src="https://github.com/chenmatou/laicai/blob/main/images/photo3.jpg" alt="甜蜜时刻3" id="photo3">
-                </div>
-            </div>
-        </section>
-        
-        <!-- 留言祝福区域 -->
-        <section class="wishes-section fade-in">
-            <h2 class="section-title">祝福留言</h2>
-            <div class="wedding-info">
-                您的祝福是我们最珍贵的礼物，请留下您对我们的祝福与期许。
-            </div>
-            
-            <!-- 祝福表单 -->
-            <form class="wish-form" id="wishForm">
-                <div class="form-group">
-                    <label for="guestName">您的姓名 *</label>
-                    <input type="text" id="guestName" name="guestName" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="guestAttendance">是否出席 *</label>
-                    <select id="guestAttendance" name="guestAttendance" required>
-                        <option value="">请选择</option>
-                        <option value="yes">准时出席，分享喜悦</option>
-                        <option value="maybe">暂不确定</option>
-                        <option value="no">很遗憾无法出席</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="guestCount">出席人数 *</label>
-                    <select id="guestCount" name="guestCount" required>
-                        <option value="">请选择</option>
-                        <option value="1">1人</option>
-                        <option value="2">2人</option>
-                        <option value="3">3人</option>
-                        <option value="4">4人</option>
-                        <option value="5">5人及以上</option>
-                    </select>
-                </div>
-                
-                <div class="form-group">
-                    <label for="guestWish">祝福留言</label>
-                    <textarea id="guestWish" name="guestWish" placeholder="请写下您的祝福..."></textarea>
-                </div>
-                
-                <button type="submit" class="submit-btn">提交祝福</button>
-            </form>
-            
-            <!-- 祝福展示 -->
-            <div class="wishes-display">
-                <div class="wish-item">
-                    <div class="wish-author">张明</div>
-                    <div class="wish-content">烟火贺喜，永结同心！祝福你们新婚快乐，白头偕老！</div>
-                </div>
-                <div class="wish-item">
-                    <div class="wish-author">李静</div>
-                    <div class="wish-content">愿你们的爱情如美酒，越陈越香；愿你们的生活如蜜糖，甜甜蜜蜜！</div>
-                </div>
-            </div>
-        </section>
-        
-        <!-- 页脚 -->
-        <section class="footer-section fade-in">
-            <div class="footer-quote">
-                Love is space and time measured by the heart.<br>
-                日子慢慢过，爱意渐渐浓。
-            </div>
-            <p>感谢您的到来与祝福</p>
-            <p>陈伊涵 & 涂腾文 敬上</p>
-            <div class="copyright">
-                2025 © 陈伊涵 & 涂腾文 | 我们同行
-            </div>
-        </section>
-    </div>
-    
-    <!-- 背景音乐 -->
-    <!-- 在这里更换音乐：将src属性值替换为您喜欢的音乐链接 -->
-    <audio id="bgMusic" loop>
-        <source src="https://github.com/chenmatou/laicai/blob/main/music/wedding-song.mp3" type="audio/mpeg">
-        您的浏览器不支持音频元素。
-    </audio>
-    
-    <script>
-        // 音乐播放控制
-        const musicControl = document.getElementById('musicControl');
-        const musicIcon = document.getElementById('musicIcon');
-        const bgMusic = document.getElementById('bgMusic');
-        let isPlaying = false;
-        
-        // 设置音乐音量
-        bgMusic.volume = 0.6;
-        
-        // 音乐控制
-        musicControl.addEventListener('click', function(e) {
-            e.stopPropagation();
-            
-            if (isPlaying) {
-                bgMusic.pause();
-                musicIcon.classList.remove('fa-pause');
-                musicIcon.classList.add('fa-play');
-            } else {
-                // 尝试播放音乐
-                const playPromise = bgMusic.play();
-                
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        musicIcon.classList.remove('fa-play');
-                        musicIcon.classList.add('fa-pause');
-                        isPlaying = true;
-                    }).catch(error => {
-                        console.log("自动播放被阻止，需要用户交互");
-                        // 如果被阻止，显示提示
-                        alert('请点击确认后，再次点击右上角音乐图标播放背景音乐');
-                    });
-                }
-            }
-            isPlaying = !isPlaying;
+  </div>
+
+  <!-- TOP MUSIC BUTTON -->
+  <div class="music-btn" id="musicBtn" aria-label="音乐开关" title="音乐开关">
+    <img src="music-icon.png" alt="music icon">
+  </div>
+
+  <div class="container">
+    <!-- COVER -->
+    <header class="cover" role="banner">
+      <div class="cover-inner">
+        <div class="date">2025.12.29</div>
+        <div class="title">我们同行</div>
+        <div class="subtitle">our wedding</div>
+        <div class="names">陈伊涵 &amp; 涂腾文</div>
+        <div class="quote">The most beautiful love, there is no end of time, there is no land. Just want to accompany you for life. That's all!</div>
+      </div>
+    </header>
+
+    <!-- OUR STORY -->
+    <section class="section">
+      <div class="title">我们的故事</div>
+      <div class="card" style="margin:0 auto; max-width:880px; text-align:center; color:#ffeec9;">
+        <p>我们曾各自在人海中寻觅，直到遇见彼此，才明白什么是命中注定。现在，我们决定携手共度余生。</p>
+      </div>
+    </section>
+
+    <!-- SWEET LAYOUT (three-photo composition) -->
+    <section class="section" aria-label="甜蜜时刻">
+      <div class="title">甜蜜时刻</div>
+
+      <div class="sweet-layout" id="sweetLayout">
+        <!-- center 1:1 (top layer) -->
+        <div class="photo center fade" id="pCenter">
+          <img src="photo-center.jpg" alt="甜蜜中心照">
+        </div>
+
+        <!-- left 4:3 (bottom layer) -->
+        <div class="photo left fade" id="pLeft">
+          <img src="photo-left.jpg" alt="甜蜜左侧照">
+        </div>
+
+        <!-- right 4:3 (bottom layer) -->
+        <div class="photo right fade" id="pRight">
+          <img src="photo-right.jpg" alt="甜蜜右侧照">
+        </div>
+      </div>
+    </section>
+
+    <!-- BACKGROUND BLOCK + MISALIGNED 9:16 PORTRAITS (male left, female right) -->
+    <section class="section" aria-label="人物展示">
+      <div class="bg-block" role="group" aria-label="背景展示">
+        <div class="stage"></div>
+
+        <!-- left (male) portrait -->
+        <div class="portrait-left fade">
+          <img src="portrait-male.jpg" alt="新郎">
+        </div>
+
+        <!-- right (female) portrait -->
+        <div class="portrait-right fade">
+          <img src="portrait-female.jpg" alt="新娘">
+        </div>
+      </div>
+    </section>
+
+    <!-- INFO CARDS -->
+    <section class="section">
+      <div class="title">婚宴信息</div>
+      <div class="info-cards">
+        <div class="card fade">
+          <h3>典礼时间</h3>
+          <p>2025年12月29日（周一）</p>
+          <p>18:00 入场 · 18:30 开始</p>
+        </div>
+        <div class="card fade">
+          <h3>典礼地点</h3>
+          <p>示例酒店 · 金色大厅</p>
+          <p>请使用地图导航或联系主办方</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WISHES (keep simple static) -->
+    <section class="section wishes">
+      <div class="title">祝福留言</div>
+      <div class="wishes">
+        <div class="card fade" style="text-align:left;">
+          <p style="color:#fff;">您的祝福是我们最珍贵的礼物，页面已做示例提交逻辑（若需要接入后端，我可以继续帮您接入）。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+      <div class="footer-text">Love is space and time measured by the heart.</div>
+      <div style="margin-top:12px; color:#f8eedd;">感谢您的到来与祝福 · 陈伊涵 &amp; 涂腾文</div>
+    </footer>
+  </div>
+
+  <!-- LOCAL AUDIO (use local file names; when hosting on GitHub, use raw URL or local assets) -->
+  <audio id="bgAudio" loop playsinline webkit-playsinline>
+    <!-- If you host at GitHub raw, use raw.githubusercontent.com path; if locally host, use music.mp3 -->
+    <!-- Example raw github (replace appropriately if using GitHub): -->
+    <!-- <source src="https://raw.githubusercontent.com/chenmatou/laicai/main/music/wedding-song.mp3" type="audio/mpeg"> -->
+    <source src="music.mp3" type="audio/mpeg">
+  </audio>
+
+<script>
+/* =========================
+   Robust Music Playback Logic
+   - popup shown initially
+   - clicking popup button or any first user interaction will attempt play
+   - popup closes immediately on click
+   - music button toggles play/pause and shows rotation while playing
+   - uses promises and fallback retry on touch
+   ========================= */
+
+(function(){
+  const popup = document.getElementById('musicPopup');
+  const musicOk = document.getElementById('musicOk');
+  const musicBtn = document.getElementById('musicBtn');
+  const bgAudio = document.getElementById('bgAudio');
+
+  // audio initial volume
+  try { bgAudio.volume = 0.65; } catch(e){}
+
+  // helper to attempt play and mark UI
+  function attemptPlay() {
+    // Try play, return promise-like behavior
+    const p = bgAudio.play();
+    if (p !== undefined) {
+      p.then(()=> {
+        // playing
+        musicBtn.classList.add('playing');
+        musicBtn.classList.remove('paused');
+      }).catch((err)=>{
+        // blocked: wait for explicit user interaction; don't alert
+        // set one-time listeners to retry on next touch/click
+        attachOneTimeInteractionRetry();
+      });
+    } else {
+      // older browsers: assume play started or not supported
+      musicBtn.classList.add('playing');
+      musicBtn.classList.remove('paused');
+    }
+  }
+
+  function attachOneTimeInteractionRetry(){
+    const retry = function(){
+      bgAudio.play().then(()=> {
+        musicBtn.classList.add('playing');
+        musicBtn.classList.remove('paused');
+      }).catch(()=>{ /* still blocked; ignore silently */ });
+      document.removeEventListener('click', retry);
+      document.removeEventListener('touchstart', retry);
+    };
+    document.addEventListener('click', retry, { once:true });
+    document.addEventListener('touchstart', retry, { once:true });
+  }
+
+  // close popup UI smoothly and try play
+  function closePopupAndPlay(){
+    if (!popup) return;
+    popup.style.opacity = '0';
+    popup.style.pointerEvents = 'none';
+    setTimeout(()=> { if (popup.parentNode) popup.parentNode.removeChild(popup); }, 320);
+    attemptPlay();
+  }
+
+  // popup button click -> close + play attempt
+  if (musicOk) {
+    musicOk.addEventListener('click', function(e){
+      e.stopPropagation();
+      closePopupAndPlay();
+    });
+  }
+
+  // Also close popup on any first general click/touch (some users tap outside)
+  function firstInteractionClose(e){
+    // ignore clicks inside the popup that are handled; this handles tapping outside
+    closePopupAndPlay();
+    document.removeEventListener('click', firstInteractionClose);
+    document.removeEventListener('touchstart', firstInteractionClose);
+  }
+  document.addEventListener('click', firstInteractionClose, { once:true });
+  document.addEventListener('touchstart', firstInteractionClose, { once:true });
+
+  // music button toggles play/pause
+  musicBtn.addEventListener('click', function(e){
+    e.stopPropagation();
+    // If audio is paused, try play (and request user gesture if needed)
+    if (bgAudio.paused) {
+      const p = bgAudio.play();
+      if (p && typeof p.then === 'function') {
+        p.then(()=> {
+          musicBtn.classList.add('playing');
+          musicBtn.classList.remove('paused');
+        }).catch(()=> {
+          // blocked - show the popup again briefly to ask for interaction
+          // recreate popup if removed
+          showTemporaryPopup();
         });
-        
-        // 滚动动画效果
-        const fadeElements = document.querySelectorAll('.fade-in');
-        
-        function checkFade() {
-            fadeElements.forEach(element => {
-                const elementTop = element.getBoundingClientRect().top;
-                const windowHeight = window.innerHeight;
-                
-                if (elementTop < windowHeight - 100) {
-                    element.classList.add('visible');
-                }
-            });
-        }
-        
-        // 初始检查和滚动时检查
-        window.addEventListener('scroll', checkFade);
-        window.addEventListener('load', checkFade);
-        
-        // 祝福表单提交
-        document.getElementById('wishForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const name = document.getElementById('guestName').value;
-            const attendance = document.getElementById('guestAttendance').value;
-            const count = document.getElementById('guestCount').value;
-            const wish = document.getElementById('guestWish').value;
-            
-            if (name && attendance && count) {
-                // 在实际应用中，这里应该将数据发送到服务器
-                // 这里我们模拟提交成功，并添加一条新的祝福
-                const wishesDisplay = document.querySelector('.wishes-display');
-                
-                // 创建新的祝福元素
-                const newWish = document.createElement('div');
-                newWish.className = 'wish-item fade-in';
-                newWish.innerHTML = `
-                    <div class="wish-author">${name}</div>
-                    <div class="wish-content">${wish || '送上最真挚的祝福！'}</div>
-                `;
-                
-                // 插入到祝福列表顶部
-                if (wishesDisplay.firstChild) {
-                    wishesDisplay.insertBefore(newWish, wishesDisplay.firstChild);
-                } else {
-                    wishesDisplay.appendChild(newWish);
-                }
-                
-                // 显示成功消息
-                alert(`感谢 ${name} 的祝福！\n我们已经收到您的回执信息。\n期待与您共享这个幸福时刻！`);
-                
-                // 重置表单
-                document.getElementById('wishForm').reset();
-                
-                // 触发动画
-                setTimeout(() => {
-                    newWish.classList.add('visible');
-                }, 100);
-            }
-        });
-        
-        // 阻止页面缩放和默认行为
-        document.addEventListener('touchmove', function(e) {
-            if (e.scale !== 1) {
-                e.preventDefault();
-            }
-        }, { passive: false });
-        
-        // 页面加载完成后，检查一次动画
-        window.addEventListener('load', function() {
-            checkFade();
-        });
-        
-        // 图片点击查看大图（可选功能）
-        document.querySelectorAll('.photo-item img').forEach(img => {
-            img.addEventListener('click', function() {
-                const src = this.src;
-                window.open(src, '_blank');
-            });
-        });
-        
-        // 初始化：页面加载后尝试播放音乐（需要用户交互）
-        document.addEventListener('click', function initAudio() {
-            // 尝试自动播放音乐（音量调低）
-            bgMusic.volume = 0.3;
-            document.removeEventListener('click', initAudio);
-        });
-    </script>
+      } else {
+        musicBtn.classList.add('playing');
+        musicBtn.classList.remove('paused');
+      }
+    } else {
+      bgAudio.pause();
+      musicBtn.classList.remove('playing');
+      musicBtn.classList.add('paused');
+    }
+  });
+
+  // In case play was blocked and user tries tapping content, we retry via one-time events
+  function showTemporaryPopup(){
+    // if popup already exists, do nothing
+    if (document.getElementById('musicPopup')) return;
+    const temp = document.createElement('div');
+    temp.id = 'musicPopup';
+    temp.innerHTML = '<div class="popup"><div class="title">请点击确认播放音乐</div><div class="hint" style="color:#ffd;">再次点击页面任意位置或按钮即可播放。</div><button class="btn" id="tempOk">确认</button></div>';
+    document.body.appendChild(temp);
+    const tOk = document.getElementById('tempOk');
+    tOk.addEventListener('click', function(){
+      // remove and retry play
+      if (temp.parentNode) temp.parentNode.removeChild(temp);
+      attemptPlay();
+    }, { once:true });
+    // also allow one-time click anywhere to retry
+    document.addEventListener('click', function retryOnce(){ attemptPlay(); document.removeEventListener('click', retryOnce); }, { once:true });
+    document.addEventListener('touchstart', function retryOnce(){ attemptPlay(); document.removeEventListener('touchstart', retryOnce); }, { once:true });
+  }
+
+  // Accessibility: allow space/enter to toggle when focused on music button
+  musicBtn.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      musicBtn.click();
+    }
+  });
+
+  // Clean up: if user navigates away, pause audio
+  window.addEventListener('pagehide', ()=> {
+    try { bgAudio.pause(); } catch(e){}
+  });
+
+  // END music logic
+})();
+
+/* =========================
+   Intersection Observer for subtle reveal animations
+   ========================= */
+(function(){
+  const ioOptions = { root: null, rootMargin: '0px', threshold: 0.12 };
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('inview');
+        // unobserve for performance
+        observer.unobserve(entry.target);
+      }
+    });
+  }, ioOptions);
+
+  document.querySelectorAll('.fade').forEach(el => observer.observe(el));
+  document.querySelectorAll('.card').forEach(el => observer.observe(el));
+  document.querySelectorAll('.portrait-left, .portrait-right, .photo').forEach(el => observer.observe(el));
+})();
+
+/* =========================
+   Optional: click-to-open large images (lightbox minimal)
+   ========================= */
+(function(){
+  document.body.addEventListener('click', function(e){
+    const img = e.target;
+    if (img && img.tagName === 'IMG' && img.closest('.photo, .portrait-left, .portrait-right')) {
+      const src = img.src;
+      // open in new tab for simplicity (GitHub Pages friendly)
+      window.open(src, '_blank');
+    }
+  });
+})();
+</script>
 </body>
 </html>
+```
