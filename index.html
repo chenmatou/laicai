@@ -3,116 +3,103 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>陈伊涵 & 涂腾文 ｜ 我们结婚啦</title>
+<title>我们结婚啦 ｜ 陈伊涵 & 涂腾文</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%}
-body{
-  font-family: "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;
-  background:#fefefe;color:#333;line-height:1.6;-webkit-font-smoothing:antialiased;
-}
-.wrap{max-width:980px;margin:18px auto;background:#fff;box-shadow:0 6px 30px rgba(0,0,0,.06);overflow:hidden;border-radius:8px}
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family: "PingFang SC","Noto Sans SC","Microsoft YaHei",sans-serif;
+    background:#fefefe;color:#333;line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:980px;margin:18px auto;background:#fff;box-shadow:0 6px 30px rgba(0,0,0,.06);overflow:hidden;border-radius:8px}
 
-/* header */
-.header{
-  height:62vh;min-height:380px;
-  background:linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.2)), url("https://raw.githubusercontent.com/chenmatou/laicai/main/images/cover.jpg") center/cover no-repeat;
-  color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;position:relative;
-}
-.header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(to top,#fff,transparent)}
-.date {font-size:1.05rem;letter-spacing:4px;font-weight:300;margin-bottom:6px}
-.title {font-size:2.0rem;letter-spacing:6px;margin:8px 0}
-.subtitle {font-size:1rem;letter-spacing:6px;margin-bottom:12px}
-.names {font-size:2.4rem;font-weight:300;letter-spacing:8px;margin-top:6px}
+  /* ---------------- header / cover ---------------- */
+  .header{
+    height:62vh;min-height:380px;
+    background:
+      linear-gradient(rgba(0,0,0,.25),rgba(0,0,0,.2)),
+      url("https://raw.githubusercontent.com/chenmatou/laicai/main/images/cover.jpg") center/cover no-repeat; /* <-- 替换：images/cover.jpg */
+    color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:28px;position:relative;
+  }
+  .header::after{content:"";position:absolute;left:0;right:0;bottom:0;height:90px;background:linear-gradient(to top,#fff,transparent)}
+  .date {font-size:1.05rem;letter-spacing:4px;font-weight:300;margin-bottom:6px}
+  .title {font-size:2.0rem;letter-spacing:6px;margin:8px 0}
+  .subtitle {font-size:1rem;letter-spacing:6px;margin-bottom:12px}
+  .names {font-size:2.4rem;font-weight:300;letter-spacing:8px;margin-top:6px}
+  .time-note {
+    margin-top:14px;background:rgba(255,255,255,.94);color:#8b7355;padding:10px 18px;border-radius:6px;font-size:0.95rem;
+  }
 
-/* small info bar under cover */
-.time-note {
-  margin-top:14px;background:rgba(255,255,255,.94);color:#8b7355;padding:10px 18px;border-radius:6px;font-size:0.95rem;
-}
+  /* ---------------- invitation / text ---------------- */
+  .section {padding:44px 36px;text-align:center}
+  .section .heading {color:#b8865a;font-size:1.6rem;margin-bottom:18px;display:inline-block;padding-bottom:6px;position:relative}
+  .section .heading::after{content:"";width:60px;height:2px;background:#e8d0b3;position:absolute;left:50%;transform:translateX(-50%);bottom:-10px}
+  .text {max-width:760px;margin:12px auto;color:#666;font-size:1.04rem;line-height:1.8}
 
-/* sections */
-.section {padding:44px 36px;text-align:center}
-.section .heading {color:#b8865a;font-size:1.6rem;margin-bottom:18px;display:inline-block;padding-bottom:6px;position:relative}
-.section .heading::after{content:"";width:60px;height:2px;background:#e8d0b3;position:absolute;left:50%;transform:translateX(-50%);bottom:-10px}
-.text {max-width:760px;margin:12px auto;color:#666;font-size:1.04rem;line-height:1.8}
+  /* ---------------- time & place block ---------------- */
+  .time-place {display:flex;flex-wrap:wrap;gap:20px;justify-content:center;padding:28px 36px;background:#fff}
+  .card {background:#f9f5f0;border-radius:10px;padding:20px;min-width:240px;box-shadow:0 8px 20px rgba(0,0,0,.04);text-align:center;}
+  .card h4{color:#b8865a;margin-bottom:8px}
+  .arrival-note{margin-top:8px;color:#8b7355;font-size:0.95rem}
 
-/* time & place */
-.time-place {display:flex;flex-wrap:wrap;gap:20px;justify-content:center;padding:28px 36px;background:#fff}
-.card {
-  background:#f9f5f0;border-radius:10px;padding:20px;min-width:240px;box-shadow:0 8px 20px rgba(0,0,0,.04);text-align:center;
-}
-.card h4{color:#b8865a;margin-bottom:8px}
-.arrival-note{margin-top:8px;color:#8b7355;font-size:0.95rem}
+  /* ---------------- countdown ---------------- */
+  .countdown-wrap{background:linear-gradient(135deg,#f7e9d7,#efe0cc);padding:36px;text-align:center}
+  .countdown-inner{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:12px}
+  .count-item{background:#fff;padding:12px 16px;border-radius:10px;min-width:88px;box-shadow:0 8px 20px rgba(0,0,0,.04)}
+  .count-value{font-size:1.9rem;color:#b8865a;font-weight:400}
+  .count-label{font-size:0.85rem;color:#7a6a5a;margin-top:6px}
 
-/* countdown */
-.countdown-wrap{background:linear-gradient(135deg,#f7e9d7,#efe0cc);padding:36px;text-align:center}
-.countdown-inner{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:12px}
-.count-item{background:#fff;padding:12px 16px;border-radius:10px;min-width:88px;box-shadow:0 8px 20px rgba(0,0,0,.04)}
-.count-value{font-size:1.9rem;color:#b8865a;font-weight:400}
-.count-label{font-size:0.85rem;color:#7a6a5a;margin-top:6px}
+  /* ---------------- sweet section（背景三）---------------- */
+  .sweet-section{padding:46px 28px;background:#fff;text-align:center;position:relative}
+  .sweet-section .heading{margin-bottom:22px}
+  .sweet-grid{display:flex;justify-content:center;align-items:flex-start;gap:20px;flex-wrap:wrap}
+  .sweet-photo{
+    width:46%;aspect-ratio:9/16;border-radius:10px;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,0.12);transition:transform .3s ease;
+  }
+  .sweet-photo-left{align-self:flex-start}
+  .sweet-photo-right{align-self:flex-end}
+  .sweet-photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .sweet-photo:hover img{transform:scale(1.03)}
+  @media(max-width:520px){.sweet-photo{width:100%;margin-top:12px}}
 
-/* sweet section（背景三）对角布局 */
-.sweet-section{padding:46px 28px;background:#fff;text-align:center;position:relative}
-.sweet-section .heading{margin-bottom:22px}
-.sweet-grid{position:relative;margin:0 auto;width:92%;max-width:920px;height:420px;z-index:2}
-.sweet-photo{
-  position:absolute;border-radius:10px;overflow:hidden;box-shadow:0 18px 40px rgba(0,0,0,0.12);background:#eee;
-}
-.sweet-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease}
-.sweet-photo:hover img{transform:scale(1.04)}
-.photo-left{width:42%;aspect-ratio:4/3;left:0;top:0;z-index:2}
-.photo-center{width:46%;aspect-ratio:1/1;left:27%;top:-6%;z-index:4;border:6px solid rgba(255,255,255,.65)}
-.photo-right{width:42%;aspect-ratio:4/3;right:0;bottom:0;z-index:2}
+  /* ---------------- 板块四: 新人个人照 ---------------- */
+  .personal-section{padding:36px 28px;background:#fff;text-align:center}
+  .personal-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:20px;position:relative}
+  .personal-photo{width:calc(50% - 10px);border-radius:10px;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,0.12);aspect-ratio:3/4;transition:transform .3s ease;}
+  .personal-left{margin-top:0}
+  .personal-right{margin-top:40px}
+  .personal-photo img{width:100%;height:100%;object-fit:cover;display:block}
+  .personal-photo:hover img{transform:scale(1.03)}
+  @media(max-width:520px){.personal-photo{width:100%;margin-top:12px !important}}
 
-/* 板块四: 对齐式错位 */
-.personal-section{padding:36px 28px;background:#fff;text-align:center}
-.personal-section .heading{margin-bottom:22px}
-.personal-grid{display:flex;flex-wrap:wrap;justify-content:center;gap:20px}
-.personal-photo{
-  width:calc(50% - 10px);border-radius:10px;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,0.12);aspect-ratio:3/4;
-  transition:transform .3s ease;
-}
-.personal-photo:nth-child(odd){margin-top:20px;} /* 错位 */
-.personal-photo img{width:100%;height:100%;object-fit:cover;display:block}
-.personal-photo:hover img{transform:scale(1.03)}
+  /* ---------------- RSVP & attendee counter ---------------- */
+  .rsvp-section{padding:36px 28px;background:#fff}
+  .rsvp-inner{max-width:720px;margin:0 auto;text-align:left}
+  .form-row{margin-bottom:16px}
+  label{display:block;margin-bottom:8px;color:#8b7355}
+  input[type="text"], select, textarea{width:100%;padding:10px 12px;border:1px solid #e8d0b3;border-radius:6px;background:#fff;font-size:1rem;color:#5a4a42}
+  .submit{display:inline-block;background:#b8865a;color:#fff;padding:10px 20px;border-radius:24px;border:none;cursor:pointer;margin-top:10px}
+  .counter-box{margin-top:18px;padding:12px 14px;background:#f9f5f0;border-radius:8px;color:#5a4a42;display:inline-block}
 
-/* RSVP */
-.rsvp-section{padding:36px 28px;background:#fff}
-.rsvp-inner{max-width:720px;margin:0 auto;text-align:left}
-.form-row{margin-bottom:16px}
-label{display:block;margin-bottom:8px;color:#8b7355}
-input[type="text"], select, textarea{width:100%;padding:10px 12px;border:1px solid #e8d0b3;border-radius:6px;background:#fff;font-size:1rem;color:#5a4a42}
-.submit{display:inline-block;background:#b8865a;color:#fff;padding:10px 20px;border-radius:24px;border:none;cursor:pointer;margin-top:10px}
-.counter-box{margin-top:18px;padding:12px 14px;background:#f9f5f0;border-radius:8px;color:#5a4a42;display:inline-block}
+  /* 音乐控制 */
+  .music-control{position:fixed;top:18px;right:18px;width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.92);display:flex;align-items:center;justify-content:center;z-index:999;box-shadow:0 6px 18px rgba(0,0,0,.12);cursor:pointer}
+  .music-control i{color:#b8865a;font-size:22px}
 
-/* 音乐控制 */
-.music-control{position:fixed;top:18px;right:18px;width:50px;height:50px;border-radius:50%;background:rgba(255,255,255,0.92);display:flex;align-items:center;justify-content:center;z-index:999;box-shadow:0 6px 18px rgba(0,0,0,.12);cursor:pointer}
-.music-control i{color:#b8865a;font-size:20px}
+  /* footer */
+  .footer{background:#5a4a42;color:#f9f5f0;text-align:center;padding:28px}
 
-/* footer */
-.footer{background:#5a4a42;color:#f9f5f0;text-align:center;padding:28px}
-
-/* responsive */
-@media(max-width:880px){
-  .sweet-grid{height:520px}
-  .photo-left{width:70%;left:6%;top:6%}
-  .photo-center{width:62%;left:19%;top:28%}
-  .photo-right{width:70%;right:6%;top:58%;bottom:auto}
-  .personal-photo{width:calc(50% - 10px);}
-}
-@media(max-width:520px){
-  .header{height:50vh}
-  .names{font-size:1.6rem}
-  .sweet-grid{height:640px}
-  .personal-photo{width:100%;margin-top:12px !important}
-}
 </style>
 </head>
 <body>
+
 <div class="wrap">
 
   <!-- header / cover -->
-  <header class="header" role="banner" aria-label="婚礼封面">
+  <header class="header" role="banner">
     <div class="date">2025.12.29</div>
     <div class="title">我们结婚啦</div>
     <div class="subtitle">our wedding</div>
@@ -121,13 +108,13 @@ input[type="text"], select, textarea{width:100%;padding:10px 12px;border:1px sol
   </header>
 
   <!-- invitation -->
-  <section class="section" aria-labelledby="inv-title">
-    <h2 id="inv-title" class="heading">诚礼邀请函</h2>
+  <section class="section">
+    <h2 class="heading">诚礼邀请函</h2>
     <p class="text">我们曾各自在人海中寻觅，直到遇见彼此，才明白什么是命中注定。诚邀你来见证我们的双向奔赴。</p>
   </section>
 
-  <!-- time & place -->
-  <section class="time-place" aria-labelledby="timeplace">
+  <!-- 时间地点板块 -->
+  <section class="time-place">
     <div class="card">
       <h4>典礼时间</h4>
       <div>2025年12月29日（星期一）</div>
@@ -142,7 +129,7 @@ input[type="text"], select, textarea{width:100%;padding:10px 12px;border:1px sol
     </div>
   </section>
 
-  <!-- countdown -->
+  <!-- 倒计时板块 -->
   <section class="countdown-wrap">
     <h3 class="heading" style="color:#b8865a">倒计时</h3>
     <div class="countdown-inner">
@@ -153,22 +140,29 @@ input[type="text"], select, textarea{width:100%;padding:10px 12px;border:1px sol
     </div>
   </section>
 
-  <!-- sweet section -->
+  <!-- 背景三: 幸福甜蜜时刻 -->
   <section class="sweet-section">
     <h3 class="heading">幸福 · 甜蜜时刻</h3>
     <div class="sweet-grid">
-      <figure class="sweet-photo photo-left"><img src="https://raw.githubusercontent.com/chenmatou/laicai/main/images/photo1.jpg" alt=""></figure>
-      <figure class="sweet-photo photo-center"><img src="https://raw.githubusercontent.com/chenmatou/laicai/main/images/photo2.jpg" alt=""></figure>
-      <figure class="sweet-photo photo-right"><img src="https://raw.githubusercontent.com/chenmatou/laicai/main/images/photo3.jpg" alt=""></figure>
+      <figure class="sweet-photo sweet-photo-left">
+        <img src="https://raw.githubusercontent.com/chenmatou/laicai/main/images/photo1.jpg" alt="甜蜜左">
+      </figure>
+      <figure class="sweet-photo sweet-photo-right">
+        <img src="https://raw.githubusercontent.com/chenmatou/laicai/main/images/photo2.jpg" alt="甜蜜右">
+      </figure>
     </div>
   </section>
 
-  <!-- personal section / 板块四 -->
+  <!-- 板块四: 新人个人照 -->
   <section class="personal-section">
     <h3 class="heading">新人照片</h3>
     <div class="personal-grid">
-      <figure class="personal-photo"><img src="https://raw.githubusercontent.com/chenmatou/laicai/main/images/person1.jpg" alt=""></figure>
-      <figure class="personal-photo"><img src="https://raw.githubusercontent.com/chenmatou/laicai/main/images/person2.jpg" alt=""></figure>
+      <figure class="personal-photo personal-left">
+        <img src="https://raw.githubusercontent.com/chenmatou/laicai/main/images/person1.jpg" alt="男方">
+      </figure>
+      <figure class="personal-photo personal-right">
+        <img src="https://raw.githubusercontent.com/chenmatou/laicai/main/images/person2.jpg" alt="女方">
+      </figure>
     </div>
   </section>
 
@@ -211,12 +205,15 @@ input[type="text"], select, textarea{width:100%;padding:10px 12px;border:1px sol
     <div style="font-size:1.04rem;margin-bottom:8px">Love is space and time measured by the heart.</div>
     <div>感谢您的到来与祝福 — 陈伊涵 &amp; 涂腾文</div>
   </footer>
-</div>
+
+</div> <!-- /.wrap -->
 
 <!-- 音乐控制 -->
 <div class="music-control" id="musicToggle" title="播放/暂停背景音乐">
-  <i id="musicIcon" class="fa fa-play"></i>
+  <i id="musicIcon" class="fa fa-music"></i>
 </div>
+
+<!-- 背景音乐 -->
 <audio id="bgMusic" loop preload="none">
   <source src="https://raw.githubusercontent.com/chenmatou/laicai/main/music/wedding-song.mp3" type="audio/mpeg">
   您的浏览器不支持音频元素。
@@ -229,53 +226,54 @@ input[type="text"], select, textarea{width:100%;padding:10px 12px;border:1px sol
   const elHours = document.getElementById('cd-hours');
   const elMinutes = document.getElementById('cd-minutes');
   const elSeconds = document.getElementById('cd-seconds');
-
   function tick(){
     const now = new Date();
     let diff = target - now;
-    if(diff <= 0){ elDays.textContent=0; elHours.textContent=0; elMinutes.textContent=0; elSeconds.textContent=0; return;}
-    const days=Math.floor(diff/86400000); diff-=days*86400000;
-    const hours=Math.floor(diff/3600000); diff-=hours*3600000;
-    const minutes=Math.floor(diff/60000); diff-=minutes*60000;
+    if(diff <= 0){ elDays.textContent=0; elHours.textContent=0; elMinutes.textContent=0; elSeconds.textContent=0; return; }
+    const days=Math.floor(diff/(1000*60*60*24)); diff-=days*24*60*60*1000;
+    const hours=Math.floor(diff/(1000*60*60)); diff-=hours*60*60*1000;
+    const minutes=Math.floor(diff/(1000*60)); diff-=minutes*60*1000;
     const seconds=Math.floor(diff/1000);
-    elDays.textContent=days; elHours.textContent=String(hours).padStart(2,'0'); elMinutes.textContent=String(minutes).padStart(2,'0'); elSeconds.textContent=String(seconds).padStart(2,'0');
+    elDays.textContent=days; elHours.textContent=String(hours).padStart(2,'0');
+    elMinutes.textContent=String(minutes).padStart(2,'0'); elSeconds.textContent=String(seconds).padStart(2,'0');
   }
   tick(); setInterval(tick,1000);
 })();
 
-/* RSVP */
 (function(){
   const form=document.getElementById('rsvpForm');
   const attendeeEl=document.getElementById('attendeeCount');
   const STORAGE_KEY='wedding_attendees_count_v1';
-  function getStored(){ const raw=localStorage.getItem(STORAGE_KEY); const v=parseInt(raw,10); return isNaN(v)?0:v;}
-  function setStored(n){localStorage.setItem(STORAGE_KEY,String(n));}
-  function render(){attendeeEl.textContent=getStored();}
+  function getStored(){ const raw=localStorage.getItem(STORAGE_KEY); const v=parseInt(raw,10); return Number.isNaN(v)?0:v; }
+  function setStored(n){ localStorage.setItem(STORAGE_KEY,String(n)); }
+  function render(){ attendeeEl.textContent=getStored(); }
   render();
   form.addEventListener('submit',function(e){
     e.preventDefault();
     const name=document.getElementById('guestName').value.trim();
     const attendance=document.getElementById('attendance').value;
     const guestCount=parseInt(document.getElementById('guestCount').value||'0',10);
-    if(!name||!attendance||!guestCount){alert('请完整填写姓名、是否出席和出席人数。');return;}
-    if(attendance==='yes'){ let current=getStored(); current+=guestCount; setStored(current); render();}
+    if(!name||!attendance||!guestCount){ alert('请完整填写姓名、是否出席和出席人数。'); return; }
+    if(attendance==='yes'){ let current=getStored(); current+=guestCount; setStored(current); render(); }
     alert(`感谢 ${name} 的回执！\n出席：${attendance==='yes'?'是':'否'}，人数：${guestCount}\n我们已收到您的信息。`);
     form.reset();
   });
 })();
 
-/* 音乐控制 */
 (function(){
   const btn=document.getElementById('musicToggle');
   const icon=document.getElementById('musicIcon');
   const audio=document.getElementById('bgMusic');
   let playing=false;
-  document.addEventListener('click',function unlock(){audio.volume=0.6; document.removeEventListener('click',unlock);});
-  btn.addEventListener('click',function(){ if(playing){audio.pause();icon.className='fa fa-play';}else{audio.play().catch(()=>{});icon.className='fa fa-pause';} playing=!playing; });
+  document.addEventListener('click',function unlock(){ audio.volume=0.6; document.removeEventListener('click',unlock); });
+  btn.addEventListener('click',function(){ if(playing){ audio.pause(); icon.className='fa fa-music'; } else { audio.play().catch(()=>{}); icon.class.className='fa fa-pause'; playing=!playing; });
 })();
 
-/* 图片点击放大 */
-document.querySelectorAll('.sweet-photo img,.personal-photo img').forEach(img=>{img.addEventListener('click',()=>{window.open(img.src,'_blank');});});
+// 点击甜蜜和个人照片可放大
+document.querySelectorAll('.sweet-photo img, .personal-photo img').forEach(img=>{
+  img.addEventListener('click',()=>{ window.open(img.src,'_blank'); });
+});
 </script>
+
 </body>
 </html>
